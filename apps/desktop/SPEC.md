@@ -596,3 +596,6 @@ the ordinary stable desktop build, with app id `dev.qikaizhang.kcode` so install
 replace ThinkRail, and the fork's release endpoint. No updater feed is published by this first
 manual release. `packages/shared/version` records the app version; the `kcode-` tag prefix keeps
 local upstream tags intact. This preview does not claim JetBrains signing or Apple notarization.
+
+KCode startup chrome follows the personal gray-blue palette and pale-blue progress accent;
+its native splash stays independent of the browser theme engine during host startup.

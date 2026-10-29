@@ -1078,3 +1078,7 @@ OpenAI-compatible provider entries. `CustomProvider` contains id, baseUrl, api, 
 hasApiKey; `CustomProviderInput` adds an optional write-only apiKey. List/save results never
 include secret values. Save distinguishes create from update to refuse accidental overwrites.
 The settings UI gates these methods with `CUSTOM_PROVIDERS_PROTOCOL_VERSION`.
+
+At v97, custom provider records add optional `reasoning`: true/false for uniform model flags,
+absent for mixed existing settings. A save without this field preserves per-model capability.
+`CUSTOM_PROVIDER_REASONING_PROTOCOL_VERSION` gates the editing control on independent clients.

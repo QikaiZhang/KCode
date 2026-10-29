@@ -79,9 +79,9 @@ test("ANSI styling preserves the exact visible composition", () => {
 	const plain = renderStartupMark({ ...HOST_READY, columns: 80 });
 	const colored = renderStartupMark({ ...HOST_READY, columns: 80, color: true });
 
-	expect(colored).toContain("\x1b[32m");
-	expect(colored).toContain("\x1b[92m");
-	expect(colored).toContain("\x1b[2;32m");
+	expect(colored).toContain("\x1b[34m");
+	expect(colored).toContain("\x1b[94m");
+	expect(colored).toContain("\x1b[2;34m");
 	expect(colored).toContain("\x1b[0;2m");
 	expect(stripAnsi(colored)).toBe(plain);
 });

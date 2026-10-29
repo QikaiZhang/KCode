@@ -5,10 +5,11 @@ import {
 	openFixtureProject,
 	openWorkspaceChat,
 	revealWorkbenchTool,
+	runInTerminal,
 	visibleTerminalScreen,
 	waitTerminalReady,
 } from "./fixtures/app";
-import { BRAND_FACE, CODE_FACE, INTERFACE_FACE } from "./fixtures/typography";
+import { BRAND_FACE, CODE_FACE, INTERFACE_FACE, TERMINAL_FACE } from "./fixtures/typography";
 
 type TypeInfo = {
 	family: string;
@@ -76,7 +77,7 @@ test("entity rows, branch metadata and eyebrows are proportional", async ({ page
 	});
 });
 
-test("Monaco and xterm render the generated code family and size", async ({ page }) => {
+test("Monaco and xterm render the generated code family and size", async ({ page }, testInfo) => {
 	await openFixtureProject(page);
 	await createWorkspaceViaDialog(page);
 	await revealWorkbenchTool(page, "files");
@@ -85,12 +86,15 @@ test("Monaco and xterm render the generated code family and size", async ({ page
 	await expect(editor).toBeVisible({ timeout: 30_000 });
 	const editorType = await typeOf(editor);
 	expect(editorType.family).toMatch(CODE_FACE);
-	expect(editorType.size).toBe("11px");
+	expect(editorType.size).toBe("12px");
 
 	await waitTerminalReady(page);
 	const termType = await typeOf(visibleTerminalScreen(page));
-	expect(termType.family).toMatch(CODE_FACE);
-	expect(termType.size).toBe("13px");
+	expect(termType.family).toMatch(TERMINAL_FACE);
+	expect(termType.size).toBe("12px");
+	await runInTerminal(page, "PS1='kcode@local % ' PROMPT='kcode@local % '; clear");
+	await expect(visibleTerminalScreen(page)).toContainText("kcode@local");
+	await page.screenshot({ path: testInfo.outputPath("kcode-vscode-style.png") });
 });
 
 test("the chat and document markdown surfaces each wear their own prose system", async ({

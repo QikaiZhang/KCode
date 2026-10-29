@@ -69,7 +69,7 @@ describe("typography source", () => {
 			compact: 1.25,
 			metadata: 1.25,
 			ui: 1.3,
-			code: 1.4,
+			code: 1.55,
 			relaxed: 1.4,
 			default: 1.3,
 			reading: 1.45,
@@ -433,16 +433,15 @@ describe("generated CSS", () => {
 		expect(GENERATED).toContain("--tr-font-size-s11: 11px;");
 		expect(GENERATED).toContain("--tr-font-size-s13: 13px;");
 		expect(GENERATED).toContain("--tr-line-height-default: 1.3;");
-		expect(GENERATED).toContain("--tr-code-row-height: 14px;");
+		expect(GENERATED).toContain("--tr-code-row-height: 19px;");
 		const monaco = read(
 			join(SRC, "../../../packages/resource-renderers/src/support/monacoSetup.ts"),
 		);
 		const xterm = read(join(SRC, "panels/TerminalInstance.tsx"));
-		expect(monaco).toContain('cssVar("--tr-font-size-s11")');
-		expect(xterm).toContain('cssVar("--tr-font-size-s13")');
-		for (const file of [monaco, xterm]) {
-			expect(file).toContain('cssVar("--tr-font-family-code")');
-		}
-		expect(monaco).toContain('cssVar("--tr-line-height-default")');
+		expect(monaco).toContain('cssVar("--tr-font-size-s12")');
+		expect(xterm).toContain('cssVar("--tr-font-size-s12")');
+		expect(monaco).toContain('cssVar("--tr-font-family-code")');
+		expect(xterm).toContain('cssVar("--tr-font-family-terminal")');
+		expect(monaco).toContain('cssVar("--tr-line-height-code")');
 	});
 });

@@ -45,17 +45,17 @@ both markdown surfaces, the `<body>` base).
 
 | Group | Ids |
 |---|---|
-| `fontFamilies` | `interface` (Geist Variable, all proportional UI + reading text) · `code` (JetBrains Mono Variable, code only) · `brand` → **Orbitron Variable** (self-hosted `@fontsource-variable/orbitron`, a distinct display face for the brand role — `wordmark` + `hero`; it was formerly a `$ref` to `interface`). Orbitron is **latin-only** and `brand.hero` renders a project's own name, so the stack falls back to the *interface* face before any system font — a non-Latin name lands on Geist (cyrillic/latin-ext/vietnamese, already bundled) rather than on whatever the OS supplies |
+| `fontFamilies` | `interface` (Geist Variable, all proportional UI + reading text) · `code` (installed Zed Mono Light, with bundled JetBrains Mono as fallback) · `terminal` (Menlo, with the same bundled fallback) · `brand` → **Orbitron Variable** (self-hosted `@fontsource-variable/orbitron`, a distinct display face for the brand role — `wordmark` + `hero`; it was formerly a `$ref` to `interface`). Orbitron is **latin-only** and `brand.hero` renders a project's own name, so the stack falls back to the *interface* face before any system font — a non-Latin name lands on Geist (cyrillic/latin-ext/vietnamese, already bundled) rather than on whatever the OS supplies |
 | `fontWeights` | `light` 370 · `regular` 400 · `medium` 500 · `semibold` 600 · `brand` 400 · `button` 470 |
 | `fontSizes` | `s10` `s11` `s12` `s13` `s14` `s16` `s18` `s20` `s24` `s44` (px) |
-| `lineHeights` | `compact` 1.25 · `metadata` 1.25 (12px→15px) · `ui` 1.3 (14px→18.2px) · `code` 1.4 · `relaxed` 1.4 (13px→18.2px) · `default` 1.3 (14px→18.2px) · `reading` 1.45 (14px→20.3px) |
+| `lineHeights` | `compact` 1.25 · `metadata` 1.25 (12px→15px) · `ui` 1.3 (14px→18.2px) · `code` 1.55 · `relaxed` 1.4 (13px→18.2px) · `default` 1.3 (14px→18.2px) · `reading` 1.45 (14px→20.3px) |
 | `letterSpacings` | `normal` · `loose` 0.02em · `wide` 0.05em · `widest` 0.1em · `brand` 0.5px |
 
 The leading scale is deliberately **dense** (1.25–1.4): Geist’s x-height at 14px is 7.4px (cap height 9.9px), so
 the former 1.5–1.6 left an empty band between lines taller than the letters themselves — it read as
 near double spacing. Reading prose — `body.reading`: chat, user messages, documents — is the deliberate exception at
 `reading` 1.45: at the dense value long replies read as a compressed wall, so reading text keeps more leading
-than UI chrome. Monaco and the Pierre diff surface read `--tr-line-height-default` and stay dense; both use a whole-pixel code row (Pierre's virtualizer needs the exact row height). `codeRow` in `typography.json` names its font size and line height, and the generator emits the pre-rounded `--tr-code-row-height`, which Pierre's CSS and its virtualizer both read, because CSS `round()` is missing before Safari 15.4. Values are short exact decimals on purpose: the production minifier rounds custom properties to
+than UI chrome. Monaco and the Pierre diff surface read `--tr-line-height-code` and match the configured code rhythm; both use a whole-pixel code row (Pierre's virtualizer needs the exact row height). `codeRow` in `typography.json` names its font size and line height, and the generator emits the pre-rounded `--tr-code-row-height`, which Pierre's CSS and its virtualizer both read, because CSS `round()` is missing before Safari 15.4. Values are short exact decimals on purpose: the production minifier rounds custom properties to
 five decimals, so a repeating ratio such as 18/14 can never land on a whole pixel (it shipped as `17.9999px`).
 
 **Semantic styles** are what components use. Each names seven primitive references and nothing else, so
@@ -265,7 +265,7 @@ The allowlist is deliberately tiny, and each entry is enforced by name in
 
 | Surface | Why it cannot use a semantic class |
 |---|---|
-| `resource-renderers/support/monacoSetup.ts` | Monaco takes `fontFamily` / `fontSize` / `lineHeight` as JS options — it reads `--tr-font-family-code`, `--tr-font-size-s11`, `--tr-line-height-default`, so it cannot drift from a code block |
+| `resource-renderers/support/monacoSetup.ts` | Monaco takes `fontFamily` / `fontSize` / `lineHeight` as JS options — it reads `--tr-font-family-code`, `--tr-font-size-s12`, `--tr-line-height-code`, so it cannot drift from a code block |
 | `resource-renderers/renderers/code/pierreVirtualizer.ts` | Pierre's virtualizer takes its row height as a JS metric — it reads the generated `--tr-code-row-height`, the same value `.pierre-code-surface` gives `--diffs-line-height` |
 | `panels/TerminalInstance.tsx` | xterm, same reason — it reads `--tr-font-family-code` + `--tr-font-size-s13` (the primitives behind `code.text`), and owns row height through its own `lineHeight` option rather than a CSS line-height |
 | `thinkrail-extensions/visualize/web/mermaid.ts` | mermaid's theme config takes a family string (`--tr-font-family-code`) |
@@ -290,3 +290,11 @@ pre-commit hook and `apps/web build` run `typography:check`, so stale generated 
 
 This primitives + semantic-tokens + schema + generator shape is the pattern a **colours** JSON should
 mirror; nothing here is Tailwind-specific, and Tailwind merely consumes the generated CSS.
+
+## Personal VS Code typography
+
+KCode follows the local VS Code setup: prefer the installed Zed Mono Light for editor/code
+surfaces, 12px and 1.55 line height (19px rounded code rows), with ligatures off. The terminal
+uses its own generated `terminal` font-family token, preferring Menlo at 12px. The existing
+self-hosted JetBrains Mono remains the portable fallback; local font files are not redistributed.
+Proportional interface and reading text retain their existing sizes and rhythm.

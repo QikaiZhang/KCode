@@ -527,7 +527,7 @@ scrolling drop from 12–34 to 2–3 dropped frames in WebKit, and the worst spl
 (~45 ms). Split scrolling over dense hunk toolbars still drops frames in WebKit; without the toolbars
 it is smooth, and `overflow: "wrap"` (which skips the pairing because both sides share grid rows) helps
 moderate scrolling but not flings. The virtualizer's `lineHeight` metric is the real row height:
-`.pierre-code-surface` rounds `--diffs-line-height` to whole pixels (`s11` × `default` = 14 px,
+`.pierre-code-surface` rounds `--diffs-line-height` to whole pixels (`s12` × `code` = 19 px,
 matching Monaco's rounding), and `codeLineHeight()` derives the same number from the tokens. Against
 Pierre's 20 px default estimate the scroll height of a 20k-line file started ~40% too tall and shrank
 while scrolling as rows were measured. Rejected after measurement: mirroring an invisible spacer onto
@@ -702,3 +702,7 @@ content's own height.
   70 ms at 4x. Click to highlighted is no later. Cost: create and first render now run in one task, so the
   longest task after the click grows at 4x CPU (cold open 120 to 145 ms, warm large open 0 to 55 ms). The
   `MonacoEditor` chunk shrinks by 12.1 kB (3.10 MB to 3.09 MB; 3.5 kB gzip).
+
+The personal KCode editor reads the shared 12px code-size and 1.55 code-leading tokens,
+with ligatures disabled to match the local VS Code preference. Font selection remains owned
+by the web typography source, with no renderer-specific font configuration.

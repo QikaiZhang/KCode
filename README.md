@@ -3,14 +3,26 @@
 KCode 是基于 ThinkRail 的本地自用定制版，保留上游内部包名和数据目录。
 
 - 设置 → 语言：选择简体中文，内置翻译已补齐。
-- 设置 → 供应商：添加 `kcode-` 开头的供应商 ID，填写名称、Base URL、密钥和每行一个模型 ID；支持 OpenAI Chat Completions / Responses。保存后新建对话使用。
+- 设置 → 供应商：本地标识由自己命名（例如 `fenno`），保存时自动补上 `kcode-` 前缀；填写名称、Base URL、密钥和服务商实际提供的模型 ID；支持 OpenAI Chat Completions / Responses。模型支持推理时打开“启用推理力度调节”，保存后新建对话，点击输入框下方模型名选择推理力度。
+- 默认外观：固定深色主题，淡蓝色强调色，深色界面参考 ZED Editor Dark Theme；编辑器优先使用本机 Zed Mono Light（12px、1.55 行高），终端优先使用 Menlo（12px）。
 - 浏览器：使用 `/skill:ego-browser`，需要本机可执行 `ego-browser skill`。
 - API 测试：使用 `/skill:api-testing`，调用已安装的 Postman / Apifox CLI；生成环境、鉴权、测试用例和报告，可按项目启动本地依赖。登录和实际接口验证需要对应账户与服务。
 - 开发启动：安装仓库指定版本的 Bun，执行 `bun install --frozen-lockfile`、`bun run dev`。
 
+![KCode 默认编辑器与终端](.github/readme-assets/kcode-vscode-style.png)
+
 ![KCode 简体中文供应商设置](.github/readme-assets/kcode-providers-zh.png)
 
-KCode 预览版下载：[GitHub Releases](https://github.com/QikaiZhang/KCode/releases)。首版提供未签名、未公证的 macOS Apple Silicon 桌面包；打开 DMG 后将 KCode.app 放入应用程序，首次打开可能需要在系统设置 → 隐私与安全性中允许打开。
+KCode 预览版下载：[GitHub Releases](https://github.com/QikaiZhang/KCode/releases)。当前提供未签名、未公证的 macOS Apple Silicon 桌面包；打开 DMG 后将 KCode.app 放入应用程序，首次打开可能需要在系统设置 → 隐私与安全性中允许打开。
+
+### 当前 Git 使用方式
+
+KCode 当前围绕 agent 工作区和改动审查组织 Git。日常使用可先选择项目的 Default 工作区，直接在项目目录工作；需要隔离 AI 任务时再新建工作区（独立分支与 worktree）。
+
+1. 让 agent 修改文件，在“更改 / 已更改文件”中查看差异。
+2. 当前没有独立的手动暂存/提交面板。可在当前工作区终端按需暂存并提交，或明确让 agent 检查并提交指定改动。
+3. 顶部“远程”的推送功能上传已提交的内容；未提交的文件修改不会因此上传。
+4. PR 用于把独立分支的修改合回目标分支，是可选步骤。
 
 以下为保留的上游项目介绍及其安装方式；其中 ThinkRail 的发行渠道属于上游项目。
 

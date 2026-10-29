@@ -1,25 +1,34 @@
 import { RiAddLine, RiDeleteBinLine, RiEditLine } from "@remixicon/react";
-import type { CustomProvider, CustomProviderInput } from "@thinkrail/contracts";
+import {
+	CUSTOM_PROVIDER_REASONING_PROTOCOL_VERSION,
+	type CustomProvider,
+	type CustomProviderInput,
+} from "@thinkrail/contracts";
 import { useT } from "@thinkrail/locales/react";
 import { Button } from "@thinkrail/ui/button";
 import { useEffect, useState } from "react";
+import { useAppStore } from "@/store";
 import { getTransport } from "@/transport";
 import { SettingsGroup } from "./SettingsGroup";
+import { SettingsSwitch } from "./SettingsSwitch";
 
 const INPUT_CLASS =
 	"w-full min-w-0 rounded-sm border border-control-border-default bg-control-bg px-8 py-4 tr-code-text text-text-default outline-none focus-visible:border-control-border-active";
 const EMPTY: CustomProviderInput = {
-	id: "kcode-",
+	id: "",
 	name: "",
 	baseUrl: "",
 	api: "openai-completions",
 	models: [],
 	apiKey: "",
+	reasoning: false,
 };
 type Draft = { provider: CustomProviderInput; modelText: string; create: boolean };
 
 export function CustomProvidersSettings() {
 	const t = useT();
+	const version = useAppStore((s) => s.protocolVersion);
+	const canSetReasoning = version !== null && version >= CUSTOM_PROVIDER_REASONING_PROTOCOL_VERSION;
 	const [providers, setProviders] = useState<CustomProvider[] | null>(null);
 	const [draft, setDraft] = useState<Draft | null>(null);
 	const [busy, setBusy] = useState(false);
@@ -52,6 +61,12 @@ export function CustomProvidersSettings() {
 		setFailed(false);
 		const provider = {
 			...draft.provider,
+			id: draft.provider.id.trim().startsWith("kcode-")
+				? draft.provider.id.trim()
+				: `kcode-${draft.provider.id.trim()}`,
+			...(canSetReasoning && draft.provider.reasoning !== undefined
+				? { reasoning: draft.provider.reasoning }
+				: {}),
 			models: draft.modelText
 				.split(/\r?\n/)
 				.map((id) => id.trim())
@@ -119,6 +134,7 @@ export function CustomProvidersSettings() {
 										baseUrl: provider.baseUrl,
 										api: provider.api,
 										models: provider.models,
+										...(provider.reasoning === undefined ? {} : { reasoning: provider.reasoning }),
 										apiKey: "",
 									},
 									modelText: provider.models.join("\n"),
@@ -164,11 +180,19 @@ export function CustomProvidersSettings() {
 										type={field === "apiKey" ? "password" : field === "baseUrl" ? "url" : "text"}
 										autoComplete="off"
 										spellCheck={false}
+										placeholder={
+											field === "id" ? t("settings.customProviders.idPlaceholder") : undefined
+										}
 										required={field !== "apiKey"}
 										disabled={field === "id" && !draft.create}
 										value={draft.provider[field] ?? ""}
 										onChange={(event) => update({ [field]: event.currentTarget.value })}
 									/>
+									{field === "id" ? (
+										<span className="tr-text-metadata text-text-muted">
+											{t("settings.customProviders.idHint")}
+										</span>
+									) : null}
 								</label>
 							))}
 							<div className="flex gap-8">
@@ -200,6 +224,31 @@ export function CustomProvidersSettings() {
 									onChange={(event) => setDraft({ ...draft, modelText: event.currentTarget.value })}
 								/>
 							</label>
+							<p className="tr-text-metadata text-text-muted">
+								{t("settings.customProviders.modelsHint")}
+							</p>
+							{canSetReasoning ? (
+								<div className="flex items-start gap-12">
+									<div className="min-w-0 flex-1">
+										<p className="tr-text-ui text-text-default">
+											{t("settings.customProviders.reasoning")}
+										</p>
+										<p className="tr-text-metadata text-text-muted">
+											{t(
+												draft.provider.reasoning === undefined
+													? "settings.customProviders.reasoningMixed"
+													: "settings.customProviders.reasoningHint",
+											)}
+										</p>
+									</div>
+									<SettingsSwitch
+										checked={draft.provider.reasoning === true}
+										testId="custom-provider-reasoning"
+										label={t("settings.customProviders.reasoning")}
+										onChange={(reasoning) => update({ reasoning })}
+									/>
+								</div>
+							) : null}
 							<p className="tr-text-metadata text-text-muted">
 								{t("settings.customProviders.note")}
 							</p>

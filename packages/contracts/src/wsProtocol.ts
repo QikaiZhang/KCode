@@ -123,7 +123,8 @@ export type TemplateReadLocation =
 	| { projectId: string; workspaceId?: never }
 	| { workspaceId?: never; projectId?: never };
 
-export const PROTOCOL_VERSION = 96;
+export const PROTOCOL_VERSION = 97;
+export const CUSTOM_PROVIDER_REASONING_PROTOCOL_VERSION = 97;
 export const CUSTOM_PROVIDERS_PROTOCOL_VERSION = 96;
 export const PROJECT_CLONE_PROTOCOL_VERSION = 95;
 export const ONBOARDING_PROTOCOL_VERSION = 94;
@@ -1169,6 +1170,7 @@ export interface CustomProvider {
 	api: "openai-completions" | "openai-responses";
 	models: string[];
 	hasApiKey: boolean;
+	reasoning?: boolean;
 }
 
 export interface CustomProviderInput extends Omit<CustomProvider, "hasApiKey"> {

@@ -1471,3 +1471,7 @@ the existing key; no key uses a nonsecret local placeholder for unauthenticated 
 Edits preserve unrelated JSONC fields and per-model settings for retained ids, refresh pi without
 network access and publish the existing provider invalidation. Already-running sessions retain their
 runtime; new chats use the refreshed configuration.
+
+Custom provider edits optionally set `reasoning` on their listed models; an omitted value preserves
+existing per-model flags. Mixed flags project as absent. Pi remains the only owner of supported
+thinking levels and request encoding; the host does not invent a level list.

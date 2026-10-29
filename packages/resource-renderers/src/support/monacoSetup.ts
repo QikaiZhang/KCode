@@ -88,8 +88,8 @@ export function fileEditorOptions(
 	bounded: boolean,
 	path: string,
 ) {
-	const fontSize = Number.parseFloat(cssVar("--tr-font-size-s11") ?? "") || 11;
-	const lineHeight = Number.parseFloat(cssVar("--tr-line-height-default") ?? "") || undefined;
+	const fontSize = Number.parseFloat(cssVar("--tr-font-size-s12") ?? "") || 12;
+	const lineHeight = Number.parseFloat(cssVar("--tr-line-height-code") ?? "") || undefined;
 	const paddingTop = Number.parseFloat(cssVar("--space-8") ?? "");
 	const options: editor.IStandaloneEditorConstructionOptions = {
 		readOnly: true,
@@ -106,6 +106,7 @@ export function fileEditorOptions(
 		scrollBeyondLastLine: false,
 		automaticLayout: true,
 		fontSize,
+		fontLigatures: false,
 		fontFamily: cssVar("--tr-font-family-code") ?? "monospace",
 		...(lineHeight && lineHeight > 0 ? { lineHeight } : {}),
 		scrollbar: {

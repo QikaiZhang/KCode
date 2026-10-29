@@ -19,8 +19,9 @@
 :root {
 	/* Font families */
 	--tr-font-family-interface: "Geist Variable", Geist, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-	--tr-font-family-code: "JetBrains Mono Variable", "JetBrains Mono", "Fira Code", "SF Mono", "Cascadia Code", monospace;
+	--tr-font-family-code: "Zed Mono Light", Zed-Mono-Light, Menlo, Monaco, "PingFang SC", "JetBrains Mono Variable", monospace;
 	--tr-font-family-brand: "Orbitron Variable", Orbitron, "Geist Variable", Geist, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+	--tr-font-family-terminal: Menlo, Monaco, "JetBrains Mono Variable", monospace;
 
 	/* Font weights */
 	--tr-font-weight-light: 370;
@@ -46,13 +47,13 @@
 	--tr-line-height-compact: 1.25;
 	--tr-line-height-metadata: 1.25;
 	--tr-line-height-ui: 1.3;
-	--tr-line-height-code: 1.4;
+	--tr-line-height-code: 1.55;
 	--tr-line-height-relaxed: 1.4;
 	--tr-line-height-default: 1.3;
 	--tr-line-height-reading: 1.45;
 
 	/* Code row height (px) — font size × line height, rounded to a whole pixel */
-	--tr-code-row-height: 14px;
+	--tr-code-row-height: 19px;
 
 	/* Letter spacing */
 	--tr-letter-spacing-normal: normal;

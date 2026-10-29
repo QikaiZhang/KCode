@@ -11,7 +11,8 @@
 :root {
 	--font-sans: "Geist Variable", "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 	--font-mono:
-		"JetBrains Mono Variable", "JetBrains Mono", "Fira Code", "SF Mono", "Cascadia Code", monospace;
+		"Zed Mono Light", "Zed-Mono-Light", "Menlo", "Monaco", "PingFang SC", "JetBrains Mono Variable",
+		monospace;
 	--font-display:
 		"Orbitron Variable", "Orbitron", "Geist Variable", "Geist", -apple-system, BlinkMacSystemFont,
 		"Segoe UI", sans-serif;

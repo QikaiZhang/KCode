@@ -97,7 +97,7 @@ bundled into `apps/web`. Exposed through explicit subpath exports, not a barrel.
   cyclic `KCODE·` field, composed with the product identity, a caller-supplied honest status, and its
   resolved endpoint. At 72+ columns it is a right-hand lockup; from 42–71 it stacks, and below 42 it uses
   the identity/status alone rather than wrapping the artwork.
-  Rendering is one synchronous write's worth of text: terminal-palette green + sparse bright signals +
+  Rendering is one synchronous write's worth of text: terminal-palette blue + sparse bright signals +
   dim separators when ANSI is allowed, plain UTF-8 for `NO_COLOR`/`TERM=dumb`, and no mark at all for
   non-interactive stdout. The root dev runner calls it before spawning concurrent tasks (`starting`);
   the source/compiled CLI calls it after `bootHost` resolves the actual URL (`host ready`). SVG/image

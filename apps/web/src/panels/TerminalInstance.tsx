@@ -140,8 +140,8 @@ export default function TerminalInstance({ tabKey, workspaceId, initialCommand }
 		const term = new XTerm({
 			allowProposedApi: true,
 			cursorBlink: true,
-			fontSize: Number.parseFloat(cssVar("--tr-font-size-s13") ?? "") || 13,
-			fontFamily: cssVar("--tr-font-family-code") ?? "monospace",
+			fontSize: Number.parseFloat(cssVar("--tr-font-size-s12") ?? "") || 12,
+			fontFamily: cssVar("--tr-font-family-terminal") ?? "monospace",
 			theme: readTheme(),
 			minimumContrastRatio: contrastFloor(),
 			scrollback: 5000,

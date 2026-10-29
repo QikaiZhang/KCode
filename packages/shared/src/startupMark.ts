@@ -28,7 +28,7 @@ const DEFAULT_COLUMNS = 80;
 const ESC = "\x1b[";
 const RESET = `${ESC}0m`;
 
-type Tone = "default" | "green" | "brightGreen" | "dimGreen" | "muted";
+type Tone = "default" | "blue" | "brightBlue" | "dimBlue" | "muted";
 
 interface Segment {
 	text: string;
@@ -54,9 +54,9 @@ export type StartupMarkEnvironment = Readonly<Record<string, string | undefined>
 
 const ANSI_BY_TONE: Record<Tone, string> = {
 	default: RESET,
-	green: `${ESC}32m`,
-	brightGreen: `${ESC}92m`,
-	dimGreen: `${ESC}2;32m`,
+	blue: `${ESC}34m`,
+	brightBlue: `${ESC}94m`,
+	dimBlue: `${ESC}2;34m`,
 	muted: `${ESC}0;2m`,
 };
 
@@ -74,10 +74,10 @@ function markLineSegments(line: string, row: number): Segment[] {
 			character === " "
 				? "default"
 				: character === "·"
-					? "dimGreen"
+					? "dimBlue"
 					: (column + row) % 7 === 0
-						? "brightGreen"
-						: "green";
+						? "brightBlue"
+						: "blue";
 		appendSegment(segments, character, tone);
 	}
 	return segments;
@@ -117,13 +117,13 @@ interface IdentityLines {
 
 function identityLines(status: StartupMarkStatus, endpoint: string): IdentityLines {
 	return {
-		product: [{ text: "KCode", tone: "brightGreen" }],
+		product: [{ text: "KCode", tone: "brightBlue" }],
 		description: [{ text: "agentic IDE for pi", tone: "muted" }],
 		status: [
-			{ text: "● ", tone: "brightGreen" },
+			{ text: "● ", tone: "brightBlue" },
 			{ text: status, tone: "muted" },
 		],
-		endpoint: [{ text: `  ${plainEndpoint(endpoint)}`, tone: "dimGreen" }],
+		endpoint: [{ text: `  ${plainEndpoint(endpoint)}`, tone: "dimBlue" }],
 	};
 }
 

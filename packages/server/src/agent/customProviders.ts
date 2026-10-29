@@ -37,6 +37,11 @@ function project(id: string, node: Node): CustomProvider | undefined {
 		!Array.isArray(raw.models)
 	)
 		return undefined;
+	const reasoning = new Set(
+		raw.models.map((m: unknown) =>
+			Boolean(m && typeof m === "object" && "reasoning" in m && m.reasoning === true),
+		),
+	);
 	return {
 		id,
 		name: typeof raw.name === "string" ? raw.name : id,
@@ -47,6 +52,7 @@ function project(id: string, node: Node): CustomProvider | undefined {
 				? [model.id]
 				: [],
 		),
+		...(reasoning.size === 1 ? { reasoning: reasoning.has(true) } : {}),
 		hasApiKey: typeof raw.apiKey === "string" && raw.apiKey.length > 0 && raw.apiKey !== LOCAL_KEY,
 	};
 }
@@ -72,6 +78,7 @@ function validate(input: CustomProviderInput): void {
 		typeof input.baseUrl !== "string" ||
 		input.baseUrl.length > 2048 ||
 		(input.api !== "openai-completions" && input.api !== "openai-responses") ||
+		(input.reasoning !== undefined && typeof input.reasoning !== "boolean") ||
 		!Array.isArray(input.models) ||
 		input.models.length === 0 ||
 		input.models.length > 100 ||
@@ -121,7 +128,8 @@ export function saveCustomProvider(
 		const oldModels = existing && findNodeAtLocation(existing, ["models"]);
 		const models = input.models.map((id) => {
 			const old = oldModels?.children?.find((m) => findNodeAtLocation(m, ["id"])?.value === id);
-			return old ? getNodeValue(old) : { id };
+			const model = old ? getNodeValue(old) : { id };
+			return input.reasoning === undefined ? model : { ...model, reasoning: input.reasoning };
 		});
 		next = applyEdits(next, modify(next, [...path, "models"], models, FORMATTING));
 		const key = input.apiKey?.trim();

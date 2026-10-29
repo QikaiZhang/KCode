@@ -47,8 +47,8 @@ export function splashMessage(
 
 export function splashDocument(message: string): string {
 	return `<!doctype html><html><head><meta charset="utf-8"><meta name="color-scheme" content="dark light"><title>KCode</title><style>
-:root{--bg:#09090b;--fg:#f4f4f5;--muted:#babac1;--accent:#8dff4f;--track:#27272a}
-@media (prefers-color-scheme: light){:root{--bg:#ffffff;--fg:#27272a;--muted:#52525b;--accent:#2a7314;--track:#e4e4e7}}
+:root{--bg:#25272d;--fg:#d3d8e2;--muted:#bbc2cf;--accent:#a9cff5;--track:#464b57}
+@media (prefers-color-scheme: light){:root{--bg:#ffffff;--fg:#27272a;--muted:#52525b;--accent:#285f93;--track:#e4e4e7}}
 html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);cursor:default;user-select:none;-webkit-user-select:none}
 body{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font:13px/1.4 system-ui,"Segoe UI",sans-serif}
 .mark{font-size:28px;font-weight:700;color:var(--accent)}

@@ -125,9 +125,9 @@ What ThinkRail does, at product level; the linked spec owns the detail.
 - **Themes** — light, dark, minimal and high-contrast themes ship built-in, following the system
   appearance or a fixed choice; a user adds a theme by saving a copy of a bundled theme file with new
   colours in `~/.thinkrail/themes`, live on save ([[submodule-web-themes]]).
-- **Brand** — ThinkRail green accent (bright on dark themes, deepened on light ones so it clears AA on
-  both), a Darcula-family dark background, Orbitron for the brand display role, Geist and JetBrains Mono
-  for UI and code ([[submodule-web-themes]], [[web-typography]]).
+- **Brand** — KCode blue accent (pale on dark surfaces, deeper for legible text on light ones),
+  a Zed-inspired gray-blue dark background, Orbitron for the brand display role, Geist for UI, and
+  locally installed Zed Mono Light / Menlo with a self-hosted JetBrains Mono fallback for code ([[submodule-web-themes]], [[web-typography]]).
 
 ## Non-goals
 

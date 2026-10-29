@@ -411,3 +411,6 @@ viewport, and downscale the 2400×1260 capture to 1200×630.
 `public/vibecoding/` owns that route's distinct favicon, 1200×630 Open Graph image, and gradient
 wordmark. Their public URLs remain under `/vibecoding/`, while Vite-generated chunks stay under the
 site-wide `/_astro/` root because one Astro base serves all route families.
+
+The personal fork keeps the code font stack aligned with the app, preferring an installed
+Zed Mono Light while continuing to bundle JetBrains Mono as the portable fallback.

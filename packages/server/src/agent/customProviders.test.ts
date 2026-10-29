@@ -4,6 +4,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { InMemoryCredentialStore } from "@earendil-works/pi-ai";
 import { ModelRuntime } from "@earendil-works/pi-coding-agent";
+import { toWireModel } from "./agentSessionManager";
 import { listCustomProviders, removeCustomProvider, saveCustomProvider } from "./customProviders";
 import { setModelContextPublisher } from "./modelContext";
 import { configurePiRuntime } from "./piRuntime";
@@ -92,4 +93,30 @@ test("an unauthenticated local Responses provider is usable in pi without exposi
 	expect((await listCustomProviders())[0]?.hasApiKey).toBe(false);
 	expect(runtime.getAvailableSnapshot().some((model) => model.provider === input.id)).toBe(true);
 	expect(runtime.getError()).toBeUndefined();
+});
+
+test("custom reasoning capability exposes pi effort levels and disabling it removes them", async () => {
+	await saveCustomProvider({ ...input, api: "openai-responses", reasoning: true }, true);
+	const model = runtime.getModel(input.id, "local-model");
+	if (!model) throw new Error("Custom model was not registered");
+	expect(toWireModel(model).thinkingLevels).toEqual(
+		expect.arrayContaining(["low", "medium", "high"]),
+	);
+	expect((await listCustomProviders())[0]?.reasoning).toBe(true);
+	await saveCustomProvider({ ...input, reasoning: false }, false);
+	const updated = runtime.getModel(input.id, "local-model");
+	if (!updated) throw new Error("Custom model was not registered");
+	expect(toWireModel(updated).thinkingLevels).toEqual(["off"]);
+});
+
+test("editing mixed model capabilities without a reasoning value keeps each setting", async () => {
+	await saveCustomProvider({ ...input, models: ["one", "two"], reasoning: true }, true);
+	const file = join(dir, "models.json");
+	const config = JSON.parse(readFileSync(file, "utf8"));
+	config.providers[input.id].models[1].reasoning = false;
+	writeFileSync(file, JSON.stringify(config));
+	expect((await listCustomProviders())[0]?.reasoning).toBeUndefined();
+	await saveCustomProvider({ ...input, models: ["one", "two"] }, false);
+	expect(runtime.getModel(input.id, "one")?.reasoning).toBe(true);
+	expect(runtime.getModel(input.id, "two")?.reasoning).toBe(false);
 });

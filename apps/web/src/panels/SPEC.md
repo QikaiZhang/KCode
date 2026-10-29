@@ -2301,3 +2301,8 @@ local `kcode-` providers with base URL, protocol, model ids and a write-only pas
 One atomic draft owns fields that save together. Save/remove await host acknowledgement and
 refresh the list; failures retain the draft and show translated generic guidance. No credential
 is persisted in browser storage. Endpoint/model validation is authoritative on the host.
+
+Custom provider creation accepts a user-chosen English shorthand and normalizes its `kcode-`
+prefix only on save. Inline help distinguishes that local identity from service-owned model ids.
+On v97+, an explicit reasoning capability switch enables pi-reported effort levels for those
+models; omitted/mixed existing flags are retained until the switch is changed.

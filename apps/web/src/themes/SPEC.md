@@ -19,7 +19,7 @@ theme = adding one `*.theme.json` file** — to `bundled/` (a PR + rebuild) or, 
 `~/.thinkrail/themes` (live, [[submodule-server-themes]]) — no code, contract, CSS, or test changes.
 
 Six manifests ship: the standard **Dark** and **Light** (the configured default and its pair, unchanged),
-**Minimal Dark** and **Minimal Light** (the quiet neutral surface hierarchy, restrained green accent and
+**Minimal Dark** and **Minimal Light** (the quiet neutral surface hierarchy, restrained blue accent and
 neutral `bubbleAccent` of the Minimal interface study, sharing the standard pair's syntax and terminal
 palettes), and the two High Contrast palettes with their stricter accessibility contract. Minimal is a
 palette a user picks in Appearance and nothing more: every theme renders the same roles, so a component
@@ -215,3 +215,18 @@ for user themes. Until then a user theme is one complete manifest.
 
 A user theme never replaces or shadows a bundled one — the `user.` namespace above is the decision.
 Operating-system contrast following and schedule/time-zone UI are out of scope.
+
+## KCode accent
+
+Bundled palettes use a subdued blue accent, pale on dark surfaces and deeper for text on light
+surfaces. Opaque light-theme buttons retain a pale blue fill with a dark label. Standard bubbles
+follow the accent; Minimal bubbles remain neutral. The existing contrast floors apply unchanged.
+
+The standard Dark palette references the user's ZED Editor Dark Theme (hagent, MIT, version
+0.1.15): gray-blue editor/sidebar/title surfaces, muted text and syntax colors. Foregrounds,
+hover and destructive colors are adapted where necessary to retain this app's contrast floors.
+Source: https://github.com/hagent/zed-dark-theme-vs-code . VS Code diff highlight overrides are
+reference only; this app's diff semantics remain owned by its resource renderers.
+
+The existing `dark` id with fixed mode remains the application default, so new installations
+receive this palette immediately. Typography is a global application default, not a theme overlay.

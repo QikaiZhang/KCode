@@ -1655,3 +1655,7 @@ the lifecycle assertable.
   is the seam for extracting a standalone `packages/chat-ui` later.
 - Keep this spec at **intent + boundary + invariants**; per-component behavior belongs in the
   components' jsdoc, per-tool detail in [tools/SPEC.md](tools/SPEC.md).
+
+Custom models expose effort through the same model/effort picker when their pi reasoning
+capability is enabled in provider settings. The label explicitly names reasoning effort; levels
+and the selected value continue to come from pi, without a second provider-level effort setting.

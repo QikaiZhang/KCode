@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { CODE_FACE, INTERFACE_FACE } from "./fixtures/typography";
+import { INTERFACE_FACE } from "./fixtures/typography";
 
 const FONT_CDNS = /fonts\.(googleapis|gstatic)\.com|api\.fontshare\.com|use\.typekit\.net/;
 
@@ -34,7 +34,7 @@ test("serves the self-hosted variable faces, including the brand weight and real
 		};
 	});
 
-	for (const family of [INTERFACE_FACE, CODE_FACE]) {
+	for (const family of [INTERFACE_FACE, "JetBrains Mono Variable"]) {
 		const faces = fonts.faces.filter((f) => f.family === family);
 		expect(faces.length, `${family} is declared`).toBeGreaterThan(0);
 		expect(
