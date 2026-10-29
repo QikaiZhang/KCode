@@ -1,5 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="64 64 384 384">
-  <title>KCode</title>
-  <style>:root { color: black; } @media (prefers-color-scheme: dark) { :root { color: white; } }</style>
-  <path fill="currentColor" d="M112 128H176V384H112Z M192 240L320 128H400L272 256Z M192 272L272 256L400 384H320Z"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<title>KCode</title>
+<style>:root { color-scheme: light dark; } @media (prefers-color-scheme: dark) { :root { color-scheme: dark; } }</style>
+<circle cx="256" cy="256" r="248" fill="#ffffff"/>
+<circle cx="256" cy="256" r="218" fill="#eef6ff" stroke="#3b82d4" stroke-width="18"/>
+<path transform="translate(38.4 38.4) scale(.85)" fill="#2769b5" d="M112 128H176V384H112Z M192 240L320 128H400L272 256Z M192 272L272 256L400 384H320Z"/>
 </svg>

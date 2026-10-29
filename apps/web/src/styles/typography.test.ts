@@ -111,7 +111,7 @@ describe("typography source", () => {
 			resolveStyle(typography, "title.dialog"),
 		);
 		expect(resolveStyle(typography, "title.dialog")).toMatchObject({
-			fontSize: "s14",
+			fontSize: "s13",
 			fontWeight: "semibold",
 			lineHeight: "compact",
 		});
@@ -178,16 +178,16 @@ describe("prose systems", () => {
 	});
 
 	it("keeps the chat scale compact — a bubble, not a document", () => {
-		expect(px("chat.body")).toBe(14);
+		expect(px("chat.body")).toBe(13);
 		expect(px("chat.h1")).toBe(18);
-		expect(px("chat.h2")).toBe(14);
+		expect(px("chat.h2")).toBe(13);
 		expect(px("chat.h3")).toBe(12);
 		expect(px("chat.codeBlock")).toBe(13);
 	});
 
 	it("gives the document scale headings larger than its body text", () => {
 		const body = px("doc.body") as number;
-		expect(body).toBe(14);
+		expect(body).toBe(13);
 		expect(["h1", "h2", "h3", "h4"].map((h) => px(`doc.${h}`))).toEqual([24, 20, 18, 16]);
 		for (const h of ["h1", "h2", "h3", "h4"])
 			expect(px(`doc.${h}`), `doc.${h} > body`).toBeGreaterThan(body);

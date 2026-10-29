@@ -1659,3 +1659,6 @@ the lifecycle assertable.
 Custom models expose effort through the same model/effort picker when their pi reasoning
 capability is enabled in provider settings. The label explicitly names reasoning effort; levels
 and the selected value continue to come from pi, without a second provider-level effort setting.
+
+Copyable message wrappers reserve at least the 20px action height, so a single 13px line
+never leaves its copy button protruding outside the message bounds.

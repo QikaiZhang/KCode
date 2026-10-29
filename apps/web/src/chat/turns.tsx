@@ -257,7 +257,7 @@ function MessageWithCopy({
 			data-testid="chat-message"
 			data-role={messageRole}
 			className={cn(
-				copyable && "group relative flex flex-col",
+				copyable && "group relative flex min-h-20 flex-col",
 				copyable && (side === "right" ? "items-end" : "items-start"),
 				side === "right" && USER_SIDE_UNBOUNDED_CLAMP,
 			)}

@@ -52,7 +52,7 @@ test("dialog title and card title share one typography", async ({ page }) => {
 	const dialog = await typeOf(
 		page.getByTestId("settings-dialog").locator(".tr-title-dialog").first(),
 	);
-	expect(dialog).toMatchObject({ size: "14px", weight: "600", lineHeight: "17.5px" });
+	expect(dialog).toMatchObject({ size: "13px", weight: "600", lineHeight: "16.25px" });
 
 	expect(card.size).toBe(dialog.size);
 	expect(card.weight).toBe(dialog.weight);
@@ -106,7 +106,7 @@ test("the chat and document markdown surfaces each wear their own prose system",
 	await expect(page.getByTestId("markdown-preview")).toContainText("sample-project");
 
 	const doc = page.locator(".tr-prose-doc").first();
-	expect(await typeOf(doc)).toMatchObject({ size: "14px", weight: "370", lineHeight: "20.3px" });
+	expect(await typeOf(doc)).toMatchObject({ size: "13px", weight: "370", lineHeight: "18.85px" });
 	expect(await typeOf(doc.locator("h1").first())).toMatchObject({ size: "24px", weight: "600" });
 
 	expect(await doc.evaluate((el) => el.classList.contains("tr-prose-chat"))).toBe(false);
@@ -138,8 +138,8 @@ test("document headings are larger than document body text", async ({ page }) =>
 		return out;
 	});
 
-	expect(measured.body).toBe(14);
-	expect(measured.h).toEqual([24, 20, 18, 16, 14, 12]);
+	expect(measured.body).toBe(13);
+	expect(measured.h).toEqual([24, 20, 18, 16, 13, 12]);
 	for (const [i, size] of measured.h.slice(0, 4).entries())
 		expect(size, `h${i + 1} > body`).toBeGreaterThan(measured.body);
 	for (let i = 1; i < measured.h.length; i++)
@@ -172,7 +172,7 @@ test("the chat prose system stays compact", async ({ page }) => {
 		return out;
 	});
 
-	expect(measured).toEqual({ body: 14, h1: 18, h2: 14, h3: 12, pre: 13 });
+	expect(measured).toEqual({ body: 13, h1: 18, h2: 13, h3: 12, pre: 13 });
 });
 
 test("typography survives a narrow mobile viewport without clipping or overflow", async ({
@@ -295,13 +295,13 @@ test("a Tailwind utility at a call site overrides the semantic default it names"
 	expect(measured.metadataItalic.fontSize).toBe(measured.metadata.fontSize);
 	expect(measured.metadataItalic.lineHeight).toBe(measured.metadata.lineHeight);
 
-	expect(measured.uiTight.lineHeight).toBe("17.5px");
-	expect(measured.ui.lineHeight).toBe("18.2px");
+	expect(measured.uiTight.lineHeight).toBe("16.25px");
+	expect(measured.ui.lineHeight).toBe("16.9px");
 	expect(measured.uiTight.fontSize).toBe(measured.ui.fontSize);
 
 	expect(measured.metadataSnug.lineHeight).toBe("16.5px");
 	expect(measured.metadataSnug.fontSize).toBe(measured.metadata.fontSize);
 
-	expect(measured.bare.fontSize).toBe("14px");
+	expect(measured.bare.fontSize).toBe("13px");
 	expect(measured.metadata.fontSize).toBe("12px");
 });

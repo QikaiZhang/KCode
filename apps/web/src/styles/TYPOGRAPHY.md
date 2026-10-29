@@ -102,7 +102,7 @@ data. Rationale lives in this file.
 ## The `<body>` base
 
 `rootStyle` is the typography of text that carries no semantic class — and it is **a `$ref`, never
-values** (today `{ "$ref": "ui.default" }`, so 14px/370 interface with a 20px line height). The generator emits it as a
+values** (today `{ "$ref": "ui.default" }`, so 13px/370 interface with a 16.9px line height). The generator emits it as a
 `body { … }` rule inside `@layer base`, which puts it *below* every semantic class in the cascade: it is
 a floor, never something a component relies on.
 
@@ -298,3 +298,10 @@ surfaces, 12px and 1.55 line height (19px rounded code rows), with ligatures off
 uses its own generated `terminal` font-family token, preferring Menlo at 12px. The existing
 self-hosted JetBrains Mono remains the portable fallback; local font files are not redistributed.
 Proportional interface and reading text retain their existing sizes and rhythm.
+
+## Compact IDE chrome
+
+The personal default uses 13px for interface/body roles formerly at 14px: sidebar rows,
+settings, buttons and ordinary prose. Existing line-height ratios scale with the smaller font;
+metadata stays 12px, and editor/terminal remain 12px. This applies uniformly across locales,
+so switching languages cannot change panel geometry or require parallel typography rules.

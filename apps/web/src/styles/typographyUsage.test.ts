@@ -171,7 +171,7 @@ describe("markdown prose systems", () => {
 	it("defines the chat hierarchy only in the JSON", () => {
 		const expected = {
 			h1: { fontSize: "s18", fontWeight: "semibold" },
-			h2: { fontSize: "s14", fontWeight: "semibold" },
+			h2: { fontSize: "s13", fontWeight: "semibold" },
 			h3: { fontSize: "s12", fontWeight: "semibold" },
 			h4: { fontSize: "s12", fontWeight: "medium" },
 			h5: { fontSize: "s12", fontWeight: "medium" },
@@ -188,7 +188,7 @@ describe("markdown prose systems", () => {
 	it("gives the document surface headings larger than its body text", () => {
 		const px = (id: string) => typography.fontSizes[resolveStyle(typography, id).fontSize];
 		const body = px("doc.body") as number;
-		expect(body).toBe(14);
+		expect(body).toBe(13);
 		expect(px("doc.h1")).toBe(24);
 		expect(px("doc.h2")).toBe(20);
 		expect(px("doc.h3")).toBe(18);

@@ -84,6 +84,10 @@ test("Simplified Chinese includes the custom provider form and KCode identity", 
 	await page.getByTestId("settings-nav-providers").click();
 	await page.getByTestId("custom-provider-add").click();
 	await expect(page.getByTestId("custom-providers")).toContainText("自定义供应商");
+	await expect(page.getByTestId("custom-providers").locator("label").first()).toHaveCSS(
+		"font-size",
+		"13px",
+	);
 	await page.getByTestId("custom-provider-id").fill("local");
 	await page.getByTestId("custom-provider-name").fill("我的模型服务");
 	await page.getByTestId("custom-provider-baseUrl").fill("http://localhost:11434/v1");

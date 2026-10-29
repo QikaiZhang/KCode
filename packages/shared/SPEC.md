@@ -119,7 +119,7 @@ bundled into `apps/web`. Exposed through explicit subpath exports, not a barrel.
   Never hand-edit a raster; regenerate them with `bun run --cwd packages/shared generate-icons`
   (`@resvg/resvg-js` rasterizes straight from the vector, `resedit` packs the ICO). The outputs are the
   macOS iconset, the Linux 512 px PNG, and the Windows ICO, whose path `windowsIconPath` exports.
-  - **Artwork.** The mark keeps its rounded-square silhouette: a warm-white geometric K on a charcoal tile. Translucent glass, highlights, and decorative edging
+  - **Artwork.** The mark keeps its rounded-square silhouette: a blue geometric K within a blue circular ring on a white rounded-square tile. Translucent glass, highlights, and decorative edging
     are excluded so small taskbar frames stay crisp.
   - **ICO frames.** PNG-compressed at 256/128/80/72/64/56/48/40/36/32/28/24/20/16: Microsoft's
     documented minimum (16/24/32/48/256), plus 64/128 and every small and big icon size Windows asks for
@@ -330,5 +330,5 @@ bundled into `apps/web`. Exposed through explicit subpath exports, not a barrel.
 
 ## KCode native icon
 
-For the personal fork, `assets/icon.svg` is the monochrome KCode mark; the existing generator produces
+For the personal fork, `assets/icon.svg` is the blue-and-white circular KCode mark; the existing generator produces
 all native raster/ICO outputs. Internal launch/data identities remain compatible.

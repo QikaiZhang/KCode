@@ -6,10 +6,10 @@ export function BrandLogo() {
 			data-testid="brand-logo"
 			role="img"
 			aria-label={PRODUCT_NAME}
-			width="32"
-			height="32"
+			width="20"
+			height="20"
 			viewBox="64 64 384 384"
-			className="size-[32px] shrink-0 text-text-default"
+			className="size-20 shrink-0 text-text-default"
 			xmlns="http://www.w3.org/2000/svg"
 		>
 			<path fill="currentColor" d={BRAND_MARK_PATH} />

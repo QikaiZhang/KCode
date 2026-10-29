@@ -4,10 +4,14 @@ KCode 是基于 ThinkRail 的本地自用定制版，保留上游内部包名和
 
 - 设置 → 语言：选择简体中文，内置翻译已补齐。
 - 设置 → 供应商：本地标识由自己命名（例如 `fenno`），保存时自动补上 `kcode-` 前缀；填写名称、Base URL、密钥和服务商实际提供的模型 ID；支持 OpenAI Chat Completions / Responses。模型支持推理时打开“启用推理力度调节”，保存后新建对话，点击输入框下方模型名选择推理力度。
+- Logo：白底蓝色圆环与几何 K 的桌面图标，应用保留灰蓝深色界面。
+- 界面密度：常规中文/英文界面字号 13px，左上角 Logo 为 20px；编辑器和终端保留 12px。
 - 默认外观：固定深色主题，淡蓝色强调色，深色界面参考 ZED Editor Dark Theme；编辑器优先使用本机 Zed Mono Light（12px、1.55 行高），终端优先使用 Menlo（12px）。
 - 浏览器：使用 `/skill:ego-browser`，需要本机可执行 `ego-browser skill`。
 - API 测试：使用 `/skill:api-testing`，调用已安装的 Postman / Apifox CLI；生成环境、鉴权、测试用例和报告，可按项目启动本地依赖。登录和实际接口验证需要对应账户与服务。
 - 开发启动：安装仓库指定版本的 Bun，执行 `bun install --frozen-lockfile`、`bun run dev`。
+
+![KCode 紧凑中文界面](.github/readme-assets/kcode-compact-zh.png)
 
 ![KCode 默认编辑器与终端](.github/readme-assets/kcode-vscode-style.png)
 

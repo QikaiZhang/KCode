@@ -151,7 +151,7 @@
 		"title": {
 			"dialog": {
 				"fontFamily": "interface",
-				"fontSize": "s14",
+				"fontSize": "s13",
 				"fontWeight": "semibold",
 				"lineHeight": "compact",
 				"letterSpacing": "normal",
@@ -163,7 +163,7 @@
 			},
 			"section": {
 				"fontFamily": "interface",
-				"fontSize": "s14",
+				"fontSize": "s13",
 				"fontWeight": "medium",
 				"lineHeight": "default",
 				"letterSpacing": "normal",
@@ -186,7 +186,7 @@
 		"ui": {
 			"default": {
 				"fontFamily": "interface",
-				"fontSize": "s14",
+				"fontSize": "s13",
 				"fontWeight": "light",
 				"lineHeight": "ui",
 				"letterSpacing": "normal",
@@ -228,7 +228,7 @@
 			},
 			"button": {
 				"fontFamily": "interface",
-				"fontSize": "s14",
+				"fontSize": "s13",
 				"fontWeight": "button",
 				"lineHeight": "ui",
 				"letterSpacing": "normal",
@@ -242,7 +242,7 @@
 		"body": {
 			"reading": {
 				"fontFamily": "interface",
-				"fontSize": "s14",
+				"fontSize": "s13",
 				"fontWeight": "light",
 				"lineHeight": "reading",
 				"letterSpacing": "normal",

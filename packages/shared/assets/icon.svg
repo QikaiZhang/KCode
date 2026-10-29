@@ -1,5 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
   <title>KCode</title>
-  <rect width="1024" height="1024" rx="224" fill="#191919"/>
-  <path transform="scale(2)" fill="#f5f5f3" d="M112 128H176V384H112Z M192 240L320 128H400L272 256Z M192 272L272 256L400 384H320Z"/>
+  <rect width="1024" height="1024" rx="224" fill="#ffffff"/>
+  <circle cx="512" cy="512" r="340" fill="#eef6ff" stroke="#3b82d4" stroke-width="36"/>
+  <path transform="translate(102.4 102.4) scale(1.6)" fill="#2769b5" d="M112 128H176V384H112Z M192 240L320 128H400L272 256Z M192 272L272 256L400 384H320Z"/>
 </svg>

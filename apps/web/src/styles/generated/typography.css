@@ -67,7 +67,7 @@
 @layer base {
 	body {
 		font-family: var(--tr-font-family-interface);
-		font-size: var(--tr-font-size-s14);
+		font-size: var(--tr-font-size-s13);
 		font-weight: var(--tr-font-weight-light);
 		line-height: var(--tr-line-height-ui);
 		letter-spacing: var(--tr-letter-spacing-normal);
@@ -125,7 +125,7 @@
 }
 .tr-title-dialog {
 	font-family: var(--tr-font-family-interface);
-	font-size: var(--tr-font-size-s14);
+	font-size: var(--tr-font-size-s13);
 	font-weight: var(--tr-font-weight-semibold);
 	line-height: var(--tr-line-height-compact);
 	letter-spacing: var(--tr-letter-spacing-normal);
@@ -134,7 +134,7 @@
 }
 .tr-title-card {
 	font-family: var(--tr-font-family-interface);
-	font-size: var(--tr-font-size-s14);
+	font-size: var(--tr-font-size-s13);
 	font-weight: var(--tr-font-weight-semibold);
 	line-height: var(--tr-line-height-compact);
 	letter-spacing: var(--tr-letter-spacing-normal);
@@ -143,7 +143,7 @@
 }
 .tr-title-section {
 	font-family: var(--tr-font-family-interface);
-	font-size: var(--tr-font-size-s14);
+	font-size: var(--tr-font-size-s13);
 	font-weight: var(--tr-font-weight-medium);
 	line-height: var(--tr-line-height-default);
 	letter-spacing: var(--tr-letter-spacing-normal);
@@ -161,7 +161,7 @@
 }
 .tr-title-entity {
 	font-family: var(--tr-font-family-interface);
-	font-size: var(--tr-font-size-s14);
+	font-size: var(--tr-font-size-s13);
 	font-weight: var(--tr-font-weight-light);
 	line-height: var(--tr-line-height-reading);
 	letter-spacing: var(--tr-letter-spacing-normal);
@@ -170,7 +170,7 @@
 }
 .tr-text-ui {
 	font-family: var(--tr-font-family-interface);
-	font-size: var(--tr-font-size-s14);
+	font-size: var(--tr-font-size-s13);
 	font-weight: var(--tr-font-weight-light);
 	line-height: var(--tr-line-height-ui);
 	letter-spacing: var(--tr-letter-spacing-normal);
@@ -224,7 +224,7 @@
 }
 .tr-text-button {
 	font-family: var(--tr-font-family-interface);
-	font-size: var(--tr-font-size-s14);
+	font-size: var(--tr-font-size-s13);
 	font-weight: var(--tr-font-weight-button);
 	line-height: var(--tr-line-height-ui);
 	letter-spacing: var(--tr-letter-spacing-normal);
@@ -242,7 +242,7 @@
 }
 .tr-text-reading {
 	font-family: var(--tr-font-family-interface);
-	font-size: var(--tr-font-size-s14);
+	font-size: var(--tr-font-size-s13);
 	font-weight: var(--tr-font-weight-light);
 	line-height: var(--tr-line-height-reading);
 	letter-spacing: var(--tr-letter-spacing-normal);
@@ -289,7 +289,7 @@
 /* Prose system 'chat' — the markdown typography for that surface. */
 .tr-prose-chat {
 	font-family: var(--tr-font-family-interface);
-	font-size: var(--tr-font-size-s14);
+	font-size: var(--tr-font-size-s13);
 	font-weight: var(--tr-font-weight-light);
 	line-height: var(--tr-line-height-reading);
 	letter-spacing: var(--tr-letter-spacing-normal);
@@ -307,7 +307,7 @@
 }
 .tr-prose-chat h2 {
 	font-family: var(--tr-font-family-interface);
-	font-size: var(--tr-font-size-s14);
+	font-size: var(--tr-font-size-s13);
 	font-weight: var(--tr-font-weight-semibold);
 	line-height: var(--tr-line-height-compact);
 	letter-spacing: var(--tr-letter-spacing-normal);
@@ -370,7 +370,7 @@
 }
 .tr-prose-chat blockquote {
 	font-family: var(--tr-font-family-interface);
-	font-size: var(--tr-font-size-s14);
+	font-size: var(--tr-font-size-s13);
 	font-weight: var(--tr-font-weight-light);
 	line-height: var(--tr-line-height-reading);
 	letter-spacing: var(--tr-letter-spacing-normal);
@@ -379,7 +379,7 @@
 }
 .tr-prose-chat :is(ul, ol, li) {
 	font-family: var(--tr-font-family-interface);
-	font-size: var(--tr-font-size-s14);
+	font-size: var(--tr-font-size-s13);
 	font-weight: var(--tr-font-weight-light);
 	line-height: var(--tr-line-height-reading);
 	letter-spacing: var(--tr-letter-spacing-normal);
@@ -421,7 +421,7 @@
 /* Prose system 'doc' — the markdown typography for that surface. */
 .tr-prose-doc {
 	font-family: var(--tr-font-family-interface);
-	font-size: var(--tr-font-size-s14);
+	font-size: var(--tr-font-size-s13);
 	font-weight: var(--tr-font-weight-light);
 	line-height: var(--tr-line-height-reading);
 	letter-spacing: var(--tr-letter-spacing-normal);
@@ -466,7 +466,7 @@
 }
 .tr-prose-doc h5 {
 	font-family: var(--tr-font-family-interface);
-	font-size: var(--tr-font-size-s14);
+	font-size: var(--tr-font-size-s13);
 	font-weight: var(--tr-font-weight-semibold);
 	line-height: var(--tr-line-height-compact);
 	letter-spacing: var(--tr-letter-spacing-normal);
@@ -502,7 +502,7 @@
 }
 .tr-prose-doc blockquote {
 	font-family: var(--tr-font-family-interface);
-	font-size: var(--tr-font-size-s14);
+	font-size: var(--tr-font-size-s13);
 	font-weight: var(--tr-font-weight-light);
 	line-height: var(--tr-line-height-reading);
 	letter-spacing: var(--tr-letter-spacing-normal);
@@ -511,7 +511,7 @@
 }
 .tr-prose-doc :is(ul, ol, li) {
 	font-family: var(--tr-font-family-interface);
-	font-size: var(--tr-font-size-s14);
+	font-size: var(--tr-font-size-s13);
 	font-weight: var(--tr-font-weight-light);
 	line-height: var(--tr-line-height-reading);
 	letter-spacing: var(--tr-letter-spacing-normal);
@@ -520,7 +520,7 @@
 }
 .tr-prose-doc :is(table, td) {
 	font-family: var(--tr-font-family-interface);
-	font-size: var(--tr-font-size-s14);
+	font-size: var(--tr-font-size-s13);
 	font-weight: var(--tr-font-weight-light);
 	line-height: var(--tr-line-height-reading);
 	letter-spacing: var(--tr-letter-spacing-normal);
@@ -529,7 +529,7 @@
 }
 .tr-prose-doc th {
 	font-family: var(--tr-font-family-interface);
-	font-size: var(--tr-font-size-s14);
+	font-size: var(--tr-font-size-s13);
 	font-weight: var(--tr-font-weight-semibold);
 	line-height: var(--tr-line-height-compact);
 	letter-spacing: var(--tr-letter-spacing-normal);

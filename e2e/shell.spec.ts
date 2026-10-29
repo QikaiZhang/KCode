@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import { expect, test } from "@playwright/test";
+import { openWorkspaceChat, runInTerminal, visibleTerminalScreen } from "./fixtures/app";
 
 test("renders the branded shell and, with no workspace, the Welcome screen", async ({ page }) => {
 	await page.goto("/");
@@ -28,8 +29,8 @@ test("renders the branded shell and, with no workspace, the Welcome screen", asy
 	await expect(logo).toHaveAttribute("aria-label", "KCode");
 	const logoBox = await logo.boundingBox();
 	expect(logoBox).not.toBeNull();
-	expect(logoBox?.height).toBeCloseTo(32, 0);
-	expect(logoBox?.width).toBeCloseTo(32, 0);
+	expect(logoBox?.height).toBeCloseTo(20, 0);
+	expect(logoBox?.width).toBeCloseTo(20, 0);
 	const logoColors = await logo.evaluate((element) => ({
 		color: getComputedStyle(element).color,
 		fill: getComputedStyle(element.querySelector("path") ?? element).fill,
@@ -47,4 +48,27 @@ test("renders the branded shell and, with no workspace, the Welcome screen", asy
 
 	await expect(page.getByTestId("connection-status")).toHaveAttribute("data-status", "connected");
 	await expect(page.getByTestId("connection-status")).toHaveAttribute("aria-label", "Connected");
+});
+
+test("Chinese workbench uses compact type and a small brand mark", async ({ page }, testInfo) => {
+	await openWorkspaceChat(page);
+	await page.getByTestId("open-settings").click();
+	await page.getByTestId("settings-nav-language").click();
+	await page.getByTestId("language-zh-CN").click();
+	try {
+		await expect(page.locator("html")).toHaveAttribute("lang", "zh-CN");
+		await expect(page.getByTestId("settings-nav-language")).toHaveCSS("font-size", "13px");
+		await page
+			.getByTestId("settings-dialog")
+			.getByRole("button", { name: "关闭", exact: true })
+			.click();
+		await expect(page.getByTestId("brand-logo")).toHaveCSS("width", "20px");
+		await runInTerminal(page, "PS1='kcode@local % ' PROMPT='kcode@local % '; clear");
+		await expect(visibleTerminalScreen(page)).toContainText("kcode@local");
+		await page.screenshot({ path: testInfo.outputPath("kcode-compact-zh.png") });
+	} finally {
+		await page.getByTestId("open-settings").click();
+		await page.getByTestId("settings-nav-language").click();
+		await page.getByTestId("language-system").click();
+	}
 });
