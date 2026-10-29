@@ -63,8 +63,8 @@ async function expectUsableHeader(
 	expect(headerBox.x).toBe(0);
 	expect(headerBox.y).toBe(0);
 	expect(headerBox.width).toBe(page.viewportSize()?.width);
-	expect(logoBox.width).toBe(32);
-	expect(logoBox.height).toBe(32);
+	expect(logoBox.width).toBe(20);
+	expect(logoBox.height).toBe(20);
 	expect(logoBox.x).toBeGreaterThanOrEqual(leftInsetBox.right);
 	expect(actionsBox.right).toBeLessThanOrEqual(rightInsetBox.x);
 	expect(logoBox.right).toBeLessThanOrEqual(actionsBox.x);
