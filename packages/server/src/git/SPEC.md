@@ -413,3 +413,6 @@ Manual commits respect hooks and signing, run through the bounded async runner, 
 auto-stage, amend, reset worktree files or push. Unborn repos can stage, unstage and commit.
 Unmerged entries block commit until resolved and staged. Diff previews cap text reads at 1 MiB
 per side; binary/large entries remain stageable without a text preview.
+
+Diff reads revalidate their index fingerprint after fetching both sides; an index transition
+rejects the read instead of presenting two absent sides to a diff renderer.

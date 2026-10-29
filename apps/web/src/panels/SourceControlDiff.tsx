@@ -121,7 +121,8 @@ export function SourceControlDiff({
 							{t("git.source.diffFailed")}
 						</p>
 					) : data ? (
-						data.isText ? (
+						data.isText &&
+						(data.meta.original.hash !== null || data.meta.modified.hash !== null) ? (
 							<Preview workspaceId={workspaceId} path={path} data={data} />
 						) : (
 							<p className="tr-text-ui text-text-muted">{t("git.source.noPreview")}</p>

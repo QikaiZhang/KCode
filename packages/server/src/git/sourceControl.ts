@@ -236,6 +236,7 @@ export async function sourceControlDiff(
 			modified = { bytes: null, available: true };
 		}
 	}
+	expectCurrent(await statusAt(cwd), status.fingerprint);
 	const meta = {
 		original: resourceMeta(original.bytes, path),
 		modified: resourceMeta(modified.bytes, path),
