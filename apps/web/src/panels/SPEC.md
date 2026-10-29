@@ -221,7 +221,7 @@ treatment.
   the active request until it settles (the dialog may close, but a second request cannot orphan it), failures
   surface to the user, and an authoritative catalog removal dismisses a now-stale confirmation instead of
   leaving a modal for a terminal another client already closed. Also `FilesPanel` (the **Files** tool: a
-  fixed panel-header row with an **All | Changed** `ToggleSegment` pair — `Changed` carries the changed-file
+  fixed panel-header row with **All | Changed | Git** mode controls (Git on v98+) — `Changed` carries the changed-file
   count when non-zero — over `FileTree` or `ChangesPanel`; the mode is app-wide, session-only,
   `store.filesMode`, default All, and `requestChangesView` / `revealChanges` reveal Files and select Changed
   in one store write. `FilesPanel` owns the single `git.status` read (`useGitStatus`, scope-keyed, including
@@ -2306,3 +2306,16 @@ Custom provider creation accepts a user-chosen English shorthand and normalizes 
 prefix only on save. Inline help distinguishes that local identity from service-owned model ids.
 On v97+, an explicit reasoning capability switch enables pi-reported effort levels for those
 models; omitted/mixed existing flags are retained until the switch is changed.
+
+## Source control
+
+Files has a Git mode on protocol v98+, backed by the existing session-only filesMode store
+owner. `SourceControlPanel` groups unstaged/staged files, offers per-file/all staging, a staged-only
+commit form, and push through the shared useShipRunner (including base-branch confirmation and
+auth guidance). Its draft is keyed to the workspace and never follows a workspace switch.
+`SourceControlDiff` presents exact index-side text in a code diff dialog, with no revert or review
+actions. Reads follow workspace invalidations; stale/busy writes reload and preserve the message.
+The existing Changes review and its scopes remain available separately.
+
+A manual commit acknowledgement clears only the draft revision that was sent. A newer edit, even with identical text,
+typed after switching file modes survives a late acknowledgement from the previous panel instance.

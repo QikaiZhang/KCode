@@ -36,6 +36,7 @@ import {
 	gitBytes,
 	nonInteractiveGitEnv,
 } from "./gitExec";
+import { indexMutationActive } from "./indexMutation";
 import { isSafeRef, remoteNameOf } from "./refs";
 
 const log = logger("git");
@@ -53,6 +54,7 @@ export function gitCommitPaths(
 ): { sha: string } | null {
 	if (paths.length === 0) return null;
 	const cwd = workspace(workspaceId).worktreePath;
+	if (indexMutationActive(cwd)) return null;
 	const unmerged = git(cwd, ["ls-files", "-u"]);
 	if (!unmerged.ok || unmerged.out) return null;
 	const indexOut = git(cwd, ["rev-parse", "--git-path", "index"]);

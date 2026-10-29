@@ -1,4 +1,5 @@
 import { RiCollapseVerticalLine } from "@remixicon/react";
+import { SOURCE_CONTROL_PROTOCOL_VERSION } from "@thinkrail/contracts";
 import { useT } from "@thinkrail/locales/react";
 import { ToggleSegment } from "@thinkrail/ui/toggle-segment";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -13,11 +14,23 @@ import {
 import { FileTree } from "./FileTree";
 import { HeaderIconButton } from "./HeaderIconButton";
 import { RememberedScrollArea } from "./RememberedScrollArea";
+import { SourceControlPanel } from "./SourceControlPanel";
 import { useGitStatus } from "./useGitStatus";
 
 export function FilesPanel({ workspaceId }: { workspaceId: string }) {
 	const t = useT();
-	const mode = useAppStore((s) => s.filesMode);
+	const storedMode = useAppStore((s) => s.filesMode);
+	const version = useAppStore((s) => s.protocolVersion);
+	const gitEnabled = version !== null && version >= SOURCE_CONTROL_PROTOCOL_VERSION;
+	const mode = storedMode === "git" && !gitEnabled ? "all" : storedMode;
+	const [messages, setMessages] = useState<Record<string, { text: string; revision: number }>>({});
+	const draft = messages[workspaceId];
+	const updateMessage = (text: string, expected?: number) =>
+		setMessages((current) => {
+			const previous = current[workspaceId];
+			if (expected !== undefined && previous?.revision !== expected) return current;
+			return { ...current, [workspaceId]: { text, revision: (previous?.revision ?? 0) + 1 } };
+		});
 	const setMode = useAppStore((s) => s.setFilesMode);
 	const changesView = useAppStore((s) => s.changesView);
 	const { status, error, reload } = useGitStatus(workspaceId);
@@ -56,7 +69,15 @@ export function FilesPanel({ workspaceId }: { workspaceId: string }) {
 					active={mode === "changed"}
 					onClick={() => setMode("changed")}
 				/>
-				{canCollapse ? (
+				{gitEnabled ? (
+					<ToggleSegment
+						testid="files-mode-git"
+						label={t("git.source.tab")}
+						active={mode === "git"}
+						onClick={() => setMode("git")}
+					/>
+				) : null}
+				{mode !== "git" && canCollapse ? (
 					<div className="ml-auto flex shrink-0">
 						<HeaderIconButton
 							testid="files-collapse-all"
@@ -67,7 +88,15 @@ export function FilesPanel({ workspaceId }: { workspaceId: string }) {
 					</div>
 				) : null}
 			</div>
-			{mode === "all" ? (
+			{mode === "git" ? (
+				<SourceControlPanel
+					key={workspaceId}
+					workspaceId={workspaceId}
+					message={draft?.text ?? ""}
+					onCommitted={() => updateMessage("", draft?.revision ?? 0)}
+					onMessage={updateMessage}
+				/>
+			) : mode === "all" ? (
 				<AllFiles workspaceId={workspaceId} marks={marks} />
 			) : (
 				<div className="min-h-0 flex-1">

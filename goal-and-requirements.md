@@ -144,3 +144,6 @@ The local product is KCode: a minimal monochrome K mark, complete Simplified Chi
 in-app local OpenAI-compatible provider editing, and discoverable ego-browser/API-testing skills.
 Tool workflows use installed host CLIs and the existing pi runtime. Upstream website, release
 channels, package scopes and on-disk identity stay ThinkRail-compatible; this fork is for personal use.
+
+The personal fork also provides manual Git staging, staged-only commits and push in Files → Git,
+with explicit index-side diff previews. Existing branch/turn review scopes remain separate.

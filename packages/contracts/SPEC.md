@@ -1082,3 +1082,14 @@ The settings UI gates these methods with `CUSTOM_PROVIDERS_PROTOCOL_VERSION`.
 At v97, custom provider records add optional `reasoning`: true/false for uniform model flags,
 absent for mixed existing settings. A save without this field preserves per-model capability.
 `CUSTOM_PROVIDER_REASONING_PROTOCOL_VERSION` gates the editing control on independent clients.
+
+## Manual source control (v98)
+
+`SOURCE_CONTROL_PROTOCOL_VERSION` gates `git.sourceStatus`, `git.sourceStage`,
+`git.sourceCommit`, and `git.sourceDiff`. `SourceControlStatus` separates staged/unstaged files
+and conflicts, and includes live branch/HEAD plus an optimistic fingerprint. Writes carry that
+fingerprint. Push retains the existing workspace.push contract and confirmations.
+
+Manual source-control failures distinguish stale views (reload/review), a busy index (retry),
+unresolved conflicts (resolve/stage), an empty index, invalid input, and bounded Git failures.
+A failed commit preserves the user's draft and the actual Git index; hooks remain Git-owned.

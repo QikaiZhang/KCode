@@ -82,7 +82,7 @@ ref off the workspace-create critical path.
   **Request-path reads run through `gitAsync`** — `resolveDiffRange`,
   `gitStatus`, `gitDiffFile`, `listCommits`, `listBranches` and the workspace badge fan-out are async, so a
   multi-spawn read can never freeze the host's single cooperative event loop (profiled at 119–246ms of
-  frozen loop per `workspace.list` before the migration). The sync runner stays for **writers** (their
+  frozen loop per `workspace.list` before the migration). The sync runner stays for **legacy snapshot/restore writers** (their
   load→mutate→save atomicity depends on not interleaving — `gitCommitPaths`' index snapshot/restore, the
   `workspaces` writers) and for **micro-plumbing leaf helpers** shared with those writers
   (`currentBranch`/`tryCurrentBranch`/`resolveDefaultBranch`/`resolveCommitOid`/`readBlobAt`/`gitHeadSha`
@@ -317,7 +317,7 @@ ref off the workspace-create critical path.
   `resolveDiffRange`, `changedFileArgs`, `diffBaseRef`, `resolveCommitOid`, `DiffRange`, `isSafeRef`,
   `assertSafeRef`, `listBranches`, `resolveDefaultBranch`, `tryCurrentBranch`, `currentBranch`,
   `canonicalPath`, `resolveListedCommit`, `prefetchBranch`, `countPushDivergence`, `listRemotes`, `remoteNameOf`,
-  `snapshotWorktree`, `ignoredPaths`.
+  `snapshotWorktree`, `ignoredPaths`, `sourceControlStatus`, `stageSourcePaths`, `commitSourceIndex`, `sourceControlDiff`.
 - **Allowed deps:** `persistence` (workspace + project lookup), `log`; `fs` (`resourceMeta`/`decodeText` —
   the one content classification, so a diff side's metadata cannot disagree with `fs.readFile`'s);
   `contracts` (`Git*`/`BranchList`/`ResourceMeta` types);
@@ -400,3 +400,16 @@ ref off the workspace-create critical path.
 - **The env layers over `process.env`, never replaces it.** `boot`'s `resolveShellEnv()` repairs `PATH`/`LANG`
   by *mutating* `process.env`; a bare env object would drop that repair and `SSH_AUTH_SOCK` with it, and a
   live agent socket is what lets the user who did load their key fetch without any prompt at all.
+
+## Manual source control
+
+`sourceControlStatus`, `stageSourcePaths`, `commitSourceIndex` and `sourceControlDiff` expose
+working-tree/index groups, literal-path staging/unstaging, staged-only commits, and exact
+HEAD↔index or index↔worktree text previews. Renames are represented as delete/add entries.
+A fingerprint covers live HEAD/branch and semantic index entries (including unresolved stages and intent-to-add visibility); stale writes reject with STALE_VIEW.
+All writes share a per-worktree admission lock; the existing optional TODO auto-commit skips
+while a manual index mutation runs, so its index save/restore cannot overwrite a manual edit.
+Manual commits respect hooks and signing, run through the bounded async runner, and never
+auto-stage, amend, reset worktree files or push. Unborn repos can stage, unstage and commit.
+Unmerged entries block commit until resolved and staged. Diff previews cap text reads at 1 MiB
+per side; binary/large entries remain stageable without a text preview.

@@ -40,3 +40,10 @@ export { git, gitAsync, gitAsyncBytes, gitAsyncStream, nonInteractiveGitEnv } fr
 export { ignoredPaths } from "./ignored";
 export { assertSafeRef, isSafeRef, remoteNameOf, remoteTrackingRef } from "./refs";
 export { snapshotWorktree } from "./snapshot";
+
+export {
+	commitSourceIndex,
+	sourceControlDiff,
+	sourceControlStatus,
+	stageSourcePaths,
+} from "./sourceControl";

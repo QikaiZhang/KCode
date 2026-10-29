@@ -123,7 +123,8 @@ export type TemplateReadLocation =
 	| { projectId: string; workspaceId?: never }
 	| { workspaceId?: never; projectId?: never };
 
-export const PROTOCOL_VERSION = 97;
+export const PROTOCOL_VERSION = 98;
+export const SOURCE_CONTROL_PROTOCOL_VERSION = 98;
 export const CUSTOM_PROVIDER_REASONING_PROTOCOL_VERSION = 97;
 export const CUSTOM_PROVIDERS_PROTOCOL_VERSION = 96;
 export const PROJECT_CLONE_PROTOCOL_VERSION = 95;
@@ -250,6 +251,10 @@ export const WS_METHODS = {
 	workspaceOpenIn: "workspace.openIn",
 	workspaceReveal: "workspace.reveal",
 	editorList: "editor.list",
+	gitSourceStatus: "git.sourceStatus",
+	gitSourceStage: "git.sourceStage",
+	gitSourceCommit: "git.sourceCommit",
+	gitSourceDiff: "git.sourceDiff",
 	gitListBranches: "git.listBranches",
 	gitPrefetch: "git.prefetch",
 	githubAuthStatus: "github.authStatus",
@@ -797,6 +802,19 @@ export interface WsMethodMap {
 		params: { workspaceId: string; sessionId: string };
 		result: { summary: string | null };
 	};
+	"git.sourceStatus": { params: { workspaceId: string }; result: SourceControlStatus };
+	"git.sourceStage": {
+		params: { workspaceId: string; paths: string[]; staged: boolean; expect: string };
+		result: SourceControlStatus;
+	};
+	"git.sourceCommit": {
+		params: { workspaceId: string; message: string; expect: string };
+		result: { sha: string; status: SourceControlStatus };
+	};
+	"git.sourceDiff": {
+		params: { workspaceId: string; path: string; staged: boolean };
+		result: SourceControlDiff;
+	};
 	"git.status": { params: { workspaceId: string; scope?: GitDiffScope }; result: GitStatus };
 	"git.diffFile": {
 		params: { workspaceId: string; path: string; scope?: GitDiffScope };
@@ -1127,6 +1145,11 @@ export interface WsResume {
 export type WsClientMessage = WsRequest | WsAck | WsResume;
 
 export type WsErrorCode =
+	| "GIT_BUSY"
+	| "GIT_OPERATION_FAILED"
+	| "GIT_NOTHING_STAGED"
+	| "GIT_CONFLICT"
+	| "GIT_INVALID_INPUT"
 	| "CUSTOM_PROVIDER_INVALID"
 	| "CUSTOM_PROVIDER_CONFLICT"
 	| "UNKNOWN_COMMIT"
@@ -1175,4 +1198,19 @@ export interface CustomProvider {
 
 export interface CustomProviderInput extends Omit<CustomProvider, "hasApiKey"> {
 	apiKey?: string;
+}
+
+export interface SourceControlStatus {
+	branch: string | null;
+	head: string | null;
+	fingerprint: string;
+	staged: import("./domain").GitFileChange[];
+	unstaged: import("./domain").GitFileChange[];
+	conflicts: string[];
+}
+export interface SourceControlDiff {
+	original: string;
+	modified: string;
+	isText: boolean;
+	meta: { original: import("./domain").ResourceMeta; modified: import("./domain").ResourceMeta };
 }

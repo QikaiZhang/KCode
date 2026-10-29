@@ -109,6 +109,7 @@ import { listExtensionCatalog } from "../extensions";
 import { recordAcceptedMessage, respondToInterview } from "../feedback";
 import { readDir, readFile } from "../fs";
 import {
+	commitSourceIndex,
 	commitsAheadOf,
 	countPushDivergence,
 	countPushTargetDivergence,
@@ -121,6 +122,9 @@ import {
 	type PushTargetStatus,
 	prefetchBranch,
 	remoteRefOid,
+	sourceControlDiff,
+	sourceControlStatus,
+	stageSourcePaths,
 } from "../git";
 import { githubAuthStatus, githubRefresh } from "../github";
 import { clampLimit, getHistoryIndex } from "../history";
@@ -863,6 +867,19 @@ const handlers: WsHandlers = {
 			throw error;
 		}
 	},
+	"git.sourceStatus": (p) => {
+		void ensureWatch(p.workspaceId);
+		return sourceControlStatus(p.workspaceId);
+	},
+	"git.sourceStage": (p) => {
+		recordWorkspaceActivity(p.workspaceId);
+		return stageSourcePaths(p.workspaceId, p.paths, p.staged, p.expect);
+	},
+	"git.sourceCommit": (p) => {
+		recordWorkspaceActivity(p.workspaceId);
+		return commitSourceIndex(p.workspaceId, p.message, p.expect);
+	},
+	"git.sourceDiff": (p) => sourceControlDiff(p.workspaceId, p.path, p.staged),
 	"git.status": (p) => {
 		void ensureWatch(p.workspaceId);
 		return gitStatus(p.workspaceId, p.scope);

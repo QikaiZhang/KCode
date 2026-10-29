@@ -692,3 +692,6 @@ sound route is snapshot-at-add, never freeze-on-drift.
 One optional persisted `ReviewComment` field carries finding provenance: `origin?: { todoId, reviewedSha,
 sessionId }` — **landed**. The wire `stale?: boolean` is derived by the host per client snapshot, never
 stored. No new tool parameter, no new `status`/`anchorState` enum value.
+
+The git.source* handlers establish workspace watching/activity and delegate manual index
+operations through git's barrel. They add no alternate staging or commit implementation.

@@ -202,7 +202,7 @@ export function isFileComparison<T extends { kind: string; before?: string | und
 	return tab.kind === "diff" && tab.before !== undefined;
 }
 export type ChangesLayout = "stacked" | "single";
-type FilesMode = "all" | "changed";
+type FilesMode = "all" | "changed" | "git";
 export type FilesScrollView = "all" | "changedList" | "changedTree";
 export interface FilesTreeView {
 	expanded: readonly string[];
