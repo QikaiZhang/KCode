@@ -140,7 +140,7 @@ forbidden.
 
 ## KCode personal fork
 
-The local product is KCode: a minimal monochrome K mark, complete Simplified Chinese catalog,
+The local product is KCode: a blue geometric K inside a circular badge on a white desktop icon, compact 13px interface typography and a complete Simplified Chinese catalog,
 in-app local OpenAI-compatible provider editing, and discoverable ego-browser/API-testing skills.
 Tool workflows use installed host CLIs and the existing pi runtime. Upstream website, release
 channels, package scopes and on-disk identity stay ThinkRail-compatible; this fork is for personal use.
