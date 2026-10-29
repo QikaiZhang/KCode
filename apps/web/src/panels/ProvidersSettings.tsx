@@ -5,6 +5,7 @@ import {
 } from "@remixicon/react";
 import {
 	type AppConfigUpdate,
+	CUSTOM_PROVIDERS_PROTOCOL_VERSION,
 	JBCENTRAL_QUOTA_PROTOCOL_VERSION,
 	type ProviderStatus,
 } from "@thinkrail/contracts";
@@ -15,6 +16,7 @@ import { useCallback, useState } from "react";
 import { AUTH_KIND_LABEL } from "@/chat/modelPicker";
 import { toast, useAppStore } from "@/store";
 import { errorText, getTransport } from "@/transport";
+import { CustomProvidersSettings } from "./CustomProvidersSettings";
 import { JetBrainsAiCard } from "./JetBrainsAiCard";
 import { ProviderRow } from "./ProviderRow";
 import { SettingsGroup, SettingsPageContainer } from "./SettingsGroup";
@@ -182,6 +184,9 @@ export function ProvidersSettings() {
 				</SettingsPageContainer>
 			)}
 
+			{protocolVersion !== null && protocolVersion >= CUSTOM_PROVIDERS_PROTOCOL_VERSION ? (
+				<CustomProvidersSettings />
+			) : null}
 			{loginDialog}
 		</div>
 	);

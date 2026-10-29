@@ -1070,3 +1070,11 @@ so an already-loaded old client clears retired markers after reconnect. No activ
 
 `web` (types + the runtime exports listed above) and `server` (same, + mapping `session.*` to `AgentSession` methods). The
 shell panels need `domain` + `wsProtocol`; the `pi` types + `PiEvent` are the wire for the agent session.
+
+## KCode provider editing (v96)
+
+`provider.customList`, `provider.customSave`, `provider.customRemove` manage the host's local
+OpenAI-compatible provider entries. `CustomProvider` contains id, baseUrl, api, model ids and
+hasApiKey; `CustomProviderInput` adds an optional write-only apiKey. List/save results never
+include secret values. Save distinguishes create from update to refuse accidental overwrites.
+The settings UI gates these methods with `CUSTOM_PROVIDERS_PROTOCOL_VERSION`.

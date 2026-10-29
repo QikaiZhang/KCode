@@ -1,4 +1,18 @@
-# ThinkRail
+# KCode
+
+KCode 是基于 ThinkRail 的本地自用定制版，保留上游内部包名和数据目录。
+
+- 设置 → 语言：选择简体中文，内置翻译已补齐。
+- 设置 → 供应商：添加 `kcode-` 开头的供应商 ID，填写名称、Base URL、密钥和每行一个模型 ID；支持 OpenAI Chat Completions / Responses。保存后新建对话使用。
+- 浏览器：使用 `/skill:ego-browser`，需要本机可执行 `ego-browser skill`。
+- API 测试：使用 `/skill:api-testing`，调用已安装的 Postman / Apifox CLI；生成环境、鉴权、测试用例和报告，可按项目启动本地依赖。登录和实际接口验证需要对应账户与服务。
+- 开发启动：安装仓库指定版本的 Bun，执行 `bun install --frozen-lockfile`、`bun run dev`。
+
+![KCode 简体中文供应商设置](.github/readme-assets/kcode-providers-zh.png)
+
+KCode 预览版下载：[GitHub Releases](https://github.com/QikaiZhang/KCode/releases)。首版提供未签名、未公证的 macOS Apple Silicon 桌面包；打开 DMG 后将 KCode.app 放入应用程序，首次打开可能需要在系统设置 → 隐私与安全性中允许打开。
+
+以下为保留的上游项目介绍及其安装方式；其中 ThinkRail 的发行渠道属于上游项目。
 
 [![JetBrains incubator project](https://jb.gg/badges/incubator-plastic.svg)](https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub)
 [![GitHub stars](https://img.shields.io/github/stars/JetBrains/thinkrail?style=social)](https://star-history.com/#JetBrains/thinkrail&Date)

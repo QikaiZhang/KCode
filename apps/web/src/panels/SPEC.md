@@ -2293,3 +2293,11 @@ own section. The kebab menu (`plan-menu`, a
   app; panels themselves don't own the boundary.
 - Streaming invariant (when chat lands): `text_delta`/`thinking_delta` **APPEND**;
   `tool_execution_update.partialResult` **REPLACE**.
+
+## KCode custom provider settings
+
+`CustomProvidersSettings`, composed by `ProvidersSettings` on protocol v96+, lists and edits
+local `kcode-` providers with base URL, protocol, model ids and a write-only password field.
+One atomic draft owns fields that save together. Save/remove await host acknowledgement and
+refresh the list; failures retain the draft and show translated generic guidance. No credential
+is persisted in browser storage. Endpoint/model validation is authoritative on the host.

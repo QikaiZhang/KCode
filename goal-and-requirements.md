@@ -137,3 +137,10 @@ forbidden.
 - **A second agent runtime**, or any host-side agent loop or prompt assembly (see Principles).
 - **ThinkRail accounts or a login UI.** Who may reach a host is decided by the network — Tailscale ACLs
   and device identity ([[architecture]]).
+
+## KCode personal fork
+
+The local product is KCode: a minimal monochrome K mark, complete Simplified Chinese catalog,
+in-app local OpenAI-compatible provider editing, and discoverable ego-browser/API-testing skills.
+Tool workflows use installed host CLIs and the existing pi runtime. Upstream website, release
+channels, package scopes and on-disk identity stay ThinkRail-compatible; this fork is for personal use.

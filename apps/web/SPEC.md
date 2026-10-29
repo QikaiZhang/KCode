@@ -386,3 +386,10 @@ themselves.
 
 The mobile single-view shell and PWA packaging (installable, offline shell) ride on this split without
 touching panels or store.
+
+## Personal KCode branding
+
+The local app displays KCode and a minimal, monochrome geometric K mark. Internal package names,
+storage prefixes and data paths remain ThinkRail-compatible. The shell, favicon and native icon
+share the K mark geometry; the shell uses the theme foreground, and the working badge draws the same segments with the existing motion
+tokens. The public upstream website remains its original brand.

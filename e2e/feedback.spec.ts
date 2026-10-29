@@ -3,7 +3,7 @@ import { WS_CHANNELS } from "@thinkrail/contracts";
 
 const BOOKING_URL = "https://calendar.app.google/5suMJdDEBFvYJ4zN9";
 const INVITATION_COPY =
-	"Tell us about your experience with ThinkRail in a user interview. After you complete the interview, you will receive 100 bonus credits in Central (JetBrains AI).";
+	"Tell us about your experience with KCode in a user interview. After you complete the interview, you will receive 100 bonus credits in Central (JetBrains AI).";
 
 type ClientRequest = {
 	id?: string;
@@ -95,7 +95,7 @@ test("feedback settings and the addressed interview prompt preserve the approved
 	sendInvitation(browserSocket);
 	const dialog = page.getByTestId("interview-prompt-dialog");
 	await expect(dialog).toBeVisible();
-	await expect(dialog).toContainText("Help shape ThinkRail");
+	await expect(dialog).toContainText("Help shape KCode");
 	await expect(dialog).toContainText(INVITATION_COPY);
 	await expect(dialog.getByTestId("interview-postpone")).toBeFocused();
 

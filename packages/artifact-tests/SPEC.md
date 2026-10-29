@@ -113,3 +113,7 @@ Locators resolve the documented app/installer paths and channel-specific setup n
 matching artifact from an ambiguous directory. Windows setup suffixes retain the stable/canary distinction.
 A macOS run is not evidence of Windows/Linux native execution or download-time Gatekeeper acceptance.
 Signing/notarization verification belongs to [[module-ci-release]]'s private service handoff.
+
+For the personal KCode build, app/installer locators use KCode names and the shared HTTP
+probe checks the KCode document title. Internal CLI commands and upstream signing recipes
+retain their original identity.

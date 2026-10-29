@@ -299,3 +299,14 @@ a one-time environment cost that no single test's budget should absorb.
 
 Website deployment contains no signing credentials. CODEOWNERS and the main-branch rules protect the
 public recipes; local builds and public PR jobs never publish user-facing release artifacts.
+
+## KCode manual preview release
+
+The personal fork may publish an explicitly unsigned macOS ARM64 preview to QikaiZhang/KCode,
+using the normal desktop build plus native artifact smoke. It retains upstream license/history,
+ships a checksum of the final local artifact, and documents verification limits in release notes.
+This is separate from JetBrains' signed distribution; it neither invokes the private coordinator
+nor claims its signing/notarization guarantees. Local task context is excluded from publication.
+
+Upstream website deployment/preview and npm publication jobs are restricted to JetBrains/thinkrail,
+so the personal repository does not attempt deployments to upstream services on its first push.

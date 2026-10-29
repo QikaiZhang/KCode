@@ -1,24 +1,24 @@
 const STARTUP_MARK_LINES = [
-	"THINKRAIL·THINKRAIL·THIN RAIL·THINK",
-	"INKRAIL·THINKRAIL·THINKR IL·THINKRAI",
-	"                                 IL·T",
-	"AIL·THINKRAI ·THINKRAIL·THINKRAI  THIN",
-	"L·THINKRAIL· HINKRAIL·THINKRAIL·T INKR",
-	"        L·TH                 ·THI  RAI",
-	"        THIN RAIL            HINK  IL·",
-	"        INKR IL·T            NKRA  ·TH",
-	"        KRAI ·THI            RAIL  HIN",
-	"        AIL· HINK AIL·THINKRAIL·  INKR",
-	"        L·TH NKRAIL·THINKRAIL·TH  KRAI",
-	"        THIN RAIL·THINKRAIL·T   KRAIL",
-	"        INKR IL·TH  KRAIL·TH  KRAIL·",
-	"        KRAI ·THI  RAIL·THINK  IL·TH",
-	"        AIL· HINK  IL·THINKRAI  THINK",
-	"        L·TH NKRA  ·TH     IL·T  NKRAI",
-	"        THIN RAIL THIN      THIN  AIL·T",
-	"        INKR IL·T INKR       NKRA  ·THIN",
-	"        KRAI ·THI KRAI        AIL·  INKRA",
-	"        AIL· HINK AIL·         ·THI  RAIL·",
+	"KCODE·K               E·KCODE·K",
+	"KCODE·K             ODE·KCODE",
+	"KCODE·K            CODE·KCOD",
+	"KCODE·K          ·KCODE·KC",
+	"KCODE·K         E·KCODE·K      CODE",
+	"KCODE·K       ODE·KCODE        CODE·",
+	"KCODE·K      CODE·KCOD          ODE·K",
+	"KCODE·K    ·KCODE·KC             DE·KCO",
+	"KCODE·K   E·KCODE·K                ·KCOD",
+	"KCODE·K     KCODE                   KCODE",
+	"KCODE·K     KCODE                   KCODE",
+	"KCODE·K   E·KCODE·K                ·KCOD",
+	"KCODE·K    ·KCODE·KC             DE·KCO",
+	"KCODE·K      CODE·KCOD          ODE·K",
+	"KCODE·K       ODE·KCODE        CODE·",
+	"KCODE·K         E·KCODE·K      CODE",
+	"KCODE·K          ·KCODE·KC",
+	"KCODE·K            CODE·KCOD",
+	"KCODE·K             ODE·KCODE",
+	"KCODE·K               E·KCODE·K",
 ] as const;
 
 const MARK_WIDTH = 42;
@@ -117,7 +117,7 @@ interface IdentityLines {
 
 function identityLines(status: StartupMarkStatus, endpoint: string): IdentityLines {
 	return {
-		product: [{ text: "THINKRAIL", tone: "brightGreen" }],
+		product: [{ text: "KCode", tone: "brightGreen" }],
 		description: [{ text: "agentic IDE for pi", tone: "muted" }],
 		status: [
 			{ text: "● ", tone: "brightGreen" },

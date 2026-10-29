@@ -123,7 +123,8 @@ export type TemplateReadLocation =
 	| { projectId: string; workspaceId?: never }
 	| { workspaceId?: never; projectId?: never };
 
-export const PROTOCOL_VERSION = 95;
+export const PROTOCOL_VERSION = 96;
+export const CUSTOM_PROVIDERS_PROTOCOL_VERSION = 96;
 export const PROJECT_CLONE_PROTOCOL_VERSION = 95;
 export const ONBOARDING_PROTOCOL_VERSION = 94;
 export const LAYOUT_PLAN_PRESET_PROTOCOL_VERSION = 94;
@@ -327,6 +328,9 @@ export const WS_METHODS = {
 	modelContextSettings: "model.contextSettings",
 	modelSetContextWindow: "model.setContextWindow",
 	modelClampThinking: "model.clampThinking",
+	providerCustomList: "provider.customList",
+	providerCustomSave: "provider.customSave",
+	providerCustomRemove: "provider.customRemove",
 	providerStatus: "provider.status",
 	providerDetect: "provider.detect",
 	providerLoginStart: "provider.loginStart",
@@ -944,6 +948,12 @@ export interface WsMethodMap {
 		params: { target: ModelContextTarget; contextWindow: number | null };
 		result: ModelContextSetting[];
 	};
+	"provider.customList": { params: Record<string, never>; result: CustomProvider[] };
+	"provider.customSave": {
+		params: { provider: CustomProviderInput; create: boolean };
+		result: CustomProvider[];
+	};
+	"provider.customRemove": { params: { id: string }; result: CustomProvider[] };
 	"provider.status": { params: Record<string, never>; result: ProviderStatusReport };
 	"provider.detect": { params: Record<string, never>; result: { accounts: DetectedAccount[] } };
 	"provider.loginStart": {
@@ -1116,6 +1126,8 @@ export interface WsResume {
 export type WsClientMessage = WsRequest | WsAck | WsResume;
 
 export type WsErrorCode =
+	| "CUSTOM_PROVIDER_INVALID"
+	| "CUSTOM_PROVIDER_CONFLICT"
 	| "UNKNOWN_COMMIT"
 	| "PUSH_AUTH_FAILED"
 	| "NOT_GIT"
@@ -1149,3 +1161,16 @@ export interface WsPush {
 }
 
 export type WsServerMessage = WsResponse | WsPush;
+
+export interface CustomProvider {
+	id: string;
+	name: string;
+	baseUrl: string;
+	api: "openai-completions" | "openai-responses";
+	models: string[];
+	hasApiKey: boolean;
+}
+
+export interface CustomProviderInput extends Omit<CustomProvider, "hasApiKey"> {
+	apiKey?: string;
+}

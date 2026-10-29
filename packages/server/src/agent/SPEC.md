@@ -1459,3 +1459,15 @@ the `/mcp` command stay pi's; ThinkRail owns what a multi-session GUI host owes 
   session's **create-time template snapshot** — a template saved mid-session is **NOT** seen by an
   already-open session's typed-through path (pi passes unknown `/name` text through verbatim). The
   composer's `/` menu path is always fresh via `template.list` (see `templates/SPEC.md` freshness rule).
+
+## KCode custom providers
+
+`customProviders` exposes list/save/remove for user-managed `kcode-` provider ids in pi's
+`models.json`, using the same serialized JSONC file edits and symlink-safe atomic writer as model
+context settings (`modelsConfig`). The host owns editing only; pi still owns registration, model
+validation and auth. Only OpenAI completions/responses entries are editable. Reads return model ids
+and a key-present boolean, never keys, headers or unrelated provider configuration. Blank key keeps
+the existing key; no key uses a nonsecret local placeholder for unauthenticated local endpoints.
+Edits preserve unrelated JSONC fields and per-model settings for retained ids, refresh pi without
+network access and publish the existing provider invalidation. Already-running sessions retain their
+runtime; new chats use the refreshed configuration.

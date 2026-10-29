@@ -193,6 +193,8 @@ flowchart LR
 
 | Skill | Role — purpose | Routed from | Status |
 |---|---|---|---|
+| `ego-browser` | worker — operate websites through the installed ego-browser CLI | narrow self-trigger / explicit skill command | pi discovery and local CLI browser connection verified; agent tool selection unverified |
+| `api-testing` | worker — prepare and run Postman/Apifox API tests | narrow self-trigger / explicit skill command | pi discovery and local Postman request/environment/assertions verified; Apifox and agent tool selection unverified |
 | `brainstorming` | worker — feature, behavior change, or bug fix → interviewed design (product, then technical) → amended specs → implementation; sibling docs `fixing-a-bug.md` (bug branch) and `amending-specs.md` (shared tail) | `choosing-a-workflow` (root) | active; the default-entry route-in — a small specified change, and a bug report reaching the bug branch with no source edit — observed green by the routing suite (2026-10), as was the mid-flow round-trip; the two-phase interview and self-driven amendment are unverified by use |
 | `setting-up-a-project` | router (sub) — dispatcher: detect the workspace's state (specs present / empty / code-only) and route | `choosing-a-workflow` (root) + self-trigger + the app's `/skill:setting-up-a-project` seed | active; empty → starting and code → importing were observed green; the revised specced → review/extend offer is unverified by use |
 | `starting-a-new-project` | worker — inception interview (empty repo → goal-and-requirements) | `setting-up-a-project` + narrow self-trigger | active; route-in observed by the routing suite; the interview itself and its living-doc template (2026-09) unverified by use (rule 14 suspended — a slice-3 candidate via the user simulator) |
@@ -361,3 +363,12 @@ follows is only the rationale the skill bodies don't state:
   rules 3/7 when the setup trio carried three drifting copies of the bar (and the dispatcher — a
   router — carried norms it shouldn't, per rule 2). The goal-doc shape (a living product record with no
   versions or roadmap) lives here, not in either setup worker, because both draft the graph root.
+
+## Personal tool workflows
+
+Two independently discoverable worker skills extend the personal KCode setup:
+`ego-browser` (browser operation through the installed ego-browser CLI's live usage guide) and
+`api-testing` (local Postman/Apifox test setup, execution and reports). They use the agent's
+ordinary shell and file tools, never Codex-only tools. They are bundled through the existing
+skill manifest and terminate with observed results or a concrete missing dependency. They do
+not add a second runtime or manage external accounts.

@@ -588,3 +588,11 @@ release checks described in [[module-ci-release]].
 Shared/remote backend profiles, profile selection, multi-window/deep-link routing, CEF, and removing the
 `user32` style-bit shim once blackboardsh/electrobun#558 ships. The update feed publication described above
 remains release-owned.
+
+## KCode personal distribution
+
+The personal fork publishes an unsigned Apple Silicon preview through QikaiZhang/KCode. It uses
+the ordinary stable desktop build, with app id `dev.qikaizhang.kcode` so installation does not
+replace ThinkRail, and the fork's release endpoint. No updater feed is published by this first
+manual release. `packages/shared/version` records the app version; the `kcode-` tag prefix keeps
+local upstream tags intact. This preview does not claim JetBrains signing or Apple notarization.

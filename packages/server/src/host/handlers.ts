@@ -42,6 +42,7 @@ import {
 	isMcpLoginId,
 	isPiSessionId,
 	listAvailableModels,
+	listCustomProviders,
 	listModelContextSettings,
 	listProjectAliasSkillNames,
 	listSessionStates,
@@ -60,6 +61,7 @@ import {
 	refreshSubagentConcurrency,
 	refreshSubagentTools,
 	reloadSessionResources,
+	removeCustomProvider,
 	removeQueuedSession,
 	removeSession,
 	removeWorkspaceSessions,
@@ -67,6 +69,7 @@ import {
 	replyMcpProbe,
 	resolveExtUi,
 	respondToTool,
+	saveCustomProvider,
 	sendReviewFixToSession,
 	setModelContextWindow,
 	setSessionModel,
@@ -1200,6 +1203,9 @@ const handlers: WsHandlers = {
 			() => resolveNewChatModel({}),
 			(result) => (result.model ? { model_available: "yes" } : {}),
 		),
+	"provider.customList": () => listCustomProviders(),
+	"provider.customSave": (p) => saveCustomProvider(p.provider, p.create),
+	"provider.customRemove": (p) => removeCustomProvider(p.id),
 	"provider.status": () =>
 		observeSetupRead(getProviderStatus, (report) => ({
 			provider_available: providerAvailability(report),

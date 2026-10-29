@@ -204,3 +204,6 @@ ourselves and never surface a credential value over the wire.
 `host` (wires all `provider.*` handlers + the `provider.login` channel publish and stops the Central watcher);
 `agent` does **not** depend on `auth` (the edge is one-way: `auth` → `agent` through the current-runtime and
 candidate-generation seams).
+
+KCode-managed custom provider ids from agent's secret-free catalog join the status allowlist
+after local editing; ids belonging to the opaque Central extension remain excluded from this addition.

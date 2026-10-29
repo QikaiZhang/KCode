@@ -7,6 +7,7 @@ export {
 	stopBackgroundCommand,
 	stopSubagent,
 } from "./chatResources";
+export { listCustomProviders, removeCustomProvider, saveCustomProvider } from "./customProviders";
 export {
 	type ReviewSubagentRun,
 	readChildTranscript,

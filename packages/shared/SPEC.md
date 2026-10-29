@@ -93,8 +93,8 @@ bundled into `apps/web`. Exposed through explicit subpath exports, not a barrel.
 - **/freePort** — `findFreePort(preferred, host?)`: the first free port at or above `preferred`, so a
   host can pick an open port instead of colliding with one already running. `isPortFree(port, host?)`:
   the underlying single-port check.
-- **/startupMark** — the launchers' one boot signature: a committed 42×20 `TR` silhouette built from a
-  cyclic `THINKRAIL·` field, composed with the product identity, a caller-supplied honest status, and its
+- **/startupMark** — the launchers' one boot signature: a committed 42×20 K/code-chevron silhouette built from a
+  cyclic `KCODE·` field, composed with the product identity, a caller-supplied honest status, and its
   resolved endpoint. At 72+ columns it is a right-hand lockup; from 42–71 it stacks, and below 42 it uses
   the identity/status alone rather than wrapping the artwork.
   Rendering is one synchronous write's worth of text: terminal-palette green + sparse bright signals +
@@ -119,8 +119,7 @@ bundled into `apps/web`. Exposed through explicit subpath exports, not a barrel.
   Never hand-edit a raster; regenerate them with `bun run --cwd packages/shared generate-icons`
   (`@resvg/resvg-js` rasterizes straight from the vector, `resedit` packs the ICO). The outputs are the
   macOS iconset, the Linux 512 px PNG, and the Windows ICO, whose path `windowsIconPath` exports.
-  - **Artwork.** The mark keeps its rounded-square silhouette: the ThinkRail glyph in the dark-family
-    brand green (`#8dff4f`) on a solid black tile. Translucent glass, highlights, and decorative edging
+  - **Artwork.** The mark keeps its rounded-square silhouette: a warm-white geometric K on a charcoal tile. Translucent glass, highlights, and decorative edging
     are excluded so small taskbar frames stay crisp.
   - **ICO frames.** PNG-compressed at 256/128/80/72/64/56/48/40/36/32/28/24/20/16: Microsoft's
     documented minimum (16/24/32/48/256), plus 64/128 and every small and big icon size Windows asks for
@@ -328,3 +327,8 @@ bundled into `apps/web`. Exposed through explicit subpath exports, not a barrel.
   `SO_REUSEPORT`), so a bind-and-catch check is unreliable. A refused connection means free.
 - `findFreePort` scans upward from `preferred` (predictable: `24242 → 24243 → …`) and falls back to an
   OS-assigned ephemeral port if the whole scan range is taken.
+
+## KCode native icon
+
+For the personal fork, `assets/icon.svg` is the monochrome KCode mark; the existing generator produces
+all native raster/ICO outputs. Internal launch/data identities remain compatible.

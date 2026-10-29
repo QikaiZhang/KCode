@@ -65,10 +65,10 @@ function installerExecutable(): string {
 		mkdirSync(mount, { recursive: true });
 		run(["hdiutil", "attach", artifact, "-nobrowse", "-readonly", "-mountpoint", mount]);
 		try {
-			const appName = channel === "stable" ? "ThinkRail.app" : `ThinkRail-${channel}.app`;
+			const appName = channel === "stable" ? "KCode.app" : `KCode-${channel}.app`;
 			const app = join(mount, appName);
 			if (!existsSync(app)) throw new Error(`desktop DMG does not contain ${appName}`);
-			const installed = join(root, "ThinkRail.app");
+			const installed = join(root, "KCode.app");
 			cpSync(app, installed, { recursive: true });
 			return join(installed, "Contents", "MacOS", "launcher");
 		} finally {
@@ -143,7 +143,7 @@ try {
 	const nativePid = launcherPid;
 	const launcher =
 		process.platform === "darwin"
-			? join(root, "ThinkRail.app", "Contents", "MacOS", "launcher")
+			? join(root, "KCode.app", "Contents", "MacOS", "launcher")
 			: join(
 					root,
 					process.platform === "win32" ? "local" : "xdg-data",

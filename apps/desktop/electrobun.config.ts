@@ -7,15 +7,15 @@ const bun = { entrypoint: "src/index.ts", version: "1.4.4" };
 
 export default {
 	app: {
-		name: "ThinkRail",
-		identifier: "ai.thinkrail.app",
+		name: "KCode",
+		identifier: "dev.qikaizhang.kcode",
 		version,
 	},
 	runtime: {
 		exitOnLastWindowClosed: true,
 	},
 	release: {
-		baseUrl: "https://github.com/JetBrains/thinkrail/releases/download/desktop-updates",
+		baseUrl: "https://github.com/QikaiZhang/KCode/releases/download/desktop-updates",
 		generatePatch: false,
 	},
 	build: {

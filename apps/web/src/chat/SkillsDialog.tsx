@@ -16,6 +16,7 @@ import { cn } from "@thinkrail/ui/utils";
 import { useCallback, useEffect, useState } from "react";
 import { toast, useAppStore } from "@/store";
 import { errorText, getTransport, reloadSessionResourcesWithSkillBaseline } from "@/transport";
+import { PRODUCT_NAME } from "../constants/branding";
 import {
 	deriveProjectTrustNotice,
 	trustEnablesText,
@@ -31,7 +32,7 @@ const TIER_META: Record<string, { label: MessageKey | null; hint: MessageKey; ra
 	project: { label: "chat.skills.tier.project", hint: "chat.skills.tier.projectHint", rank: 4 },
 };
 
-const TIER_BRAND: Record<string, string> = { bundled: "ThinkRail", pi: "Pi" };
+const TIER_BRAND: Record<string, string> = { bundled: PRODUCT_NAME, pi: "Pi" };
 
 interface Group {
 	key: string;

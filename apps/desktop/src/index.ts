@@ -421,7 +421,7 @@ async function start(): Promise<void> {
 					windowChromePreloadSeed(windowChrome),
 				);
 	mainWindow = new BrowserWindow({
-		title: "ThinkRail",
+		title: "KCode",
 		url: neutral ? "about:blank" : `${origin}/${initialRoute}`,
 		preload,
 		...(neutral ? {} : { rpc }),

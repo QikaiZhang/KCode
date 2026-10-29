@@ -21,6 +21,7 @@ import { QuietScrollArea } from "@/components/QuietScrollArea";
 import { PlanStatusIcon, SectionLabel } from "../chat/planKit";
 import { sessionGlance } from "../chat/planView";
 import { glanceIcon } from "../chat/TodoList";
+import { PRODUCT_NAME } from "../constants/branding";
 import { type ReviewFocusSurface, selectDiffScope, toast, useAppStore } from "../store";
 import { errorText, getTransport } from "../transport";
 import { ConfirmPopover } from "./ConfirmPopover";
@@ -413,7 +414,7 @@ function CommentRow({
 								title={t("review.panel.agentFiled")}
 								className="flex items-center gap-2 tr-text-eyebrow text-text-subtle"
 							>
-								<Bot className="size-12" /> ThinkRail
+								<Bot className="size-12" /> {PRODUCT_NAME}
 							</span>
 						)}
 						{ref && <span className="tr-code-text text-text-subtle">{ref}</span>}
